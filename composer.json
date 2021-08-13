@@ -1,0 +1,7 @@
+{
+    "name": "prinsfrank/php-geo-svg",
+    "description": "Generate Geo SVGs",
+    "type": "library",
+    "license": "MIT",
+    "require": {}
+}
