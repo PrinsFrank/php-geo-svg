@@ -2,6 +2,8 @@
 
 namespace PrinsFrank\PhpGeoSVG;
 
+use PrinsFrank\PhpGeoSVG\MultiPolygon\MultiPolygon;
+use PrinsFrank\PhpGeoSVG\MultiPolygon\MultiPolygonRenderer;
 use PrinsFrank\PhpGeoSVG\Polygon\Polygon;
 use PrinsFrank\PhpGeoSVG\Polygon\PolygonRenderer;
 
@@ -23,9 +25,9 @@ class GeoSVGRenderer
                 'preserveAspectRatio="xMidYMid slice" ' .
                 'viewBox="' . $this->geoSVG->viewbox->getMinLatitude() . ' ' . $this->geoSVG->viewbox->getMinLongitude() . ' ' . $this->geoSVG->viewbox->getWidth() . ' ' . $this->geoSVG->viewbox->getHeight() . '">'. PHP_EOL .
                 '<g class="countries" transform="matrix(1 0 0 -1 0 0)">' . PHP_EOL .
-                    implode(PHP_EOL, array_map(static function (Polygon $polygon) {
-                        return PolygonRenderer::render($polygon);
-                    }, $this->geoSVG->polygons)) . PHP_EOL .
+                    implode(PHP_EOL, array_map(static function (MultiPolygon $multiPolygon) {
+                        return MultiPolygonRenderer::render($multiPolygon);
+                    }, $this->geoSVG->multiPolygons)) . PHP_EOL .
                 '</g>' . PHP_EOL .
             '</svg>'
         ;

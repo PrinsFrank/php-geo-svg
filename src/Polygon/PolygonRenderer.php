@@ -11,9 +11,9 @@ class PolygonRenderer
         return
             '<path ' .
             'd="M' .
-            implode('L', array_map(static function(Vertex $vertex) {
-                return $vertex->longitude . ',' . $vertex->latitude;
-            }, $polygon->vertices)) .
+                implode('L', array_map(static function(Vertex $vertex) {
+                    return $vertex->latitude . ',' . $vertex->longitude;
+                }, $polygon->vertices)) .
             '">' .
             '</path>'
         ;
