@@ -3,5 +3,17 @@
     "description": "Generate Geo SVGs",
     "type": "library",
     "license": "MIT",
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "PrinsFrank\\PhpGeoSVG\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PrinsFrank\\PhpGeoSVG\\Tests\\": "tests/"
+        }
+    }
 }
