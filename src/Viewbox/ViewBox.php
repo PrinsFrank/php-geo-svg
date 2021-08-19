@@ -62,7 +62,7 @@ class ViewBox
      */
     public function setMinLatitude(float $minLatitude): self
     {
-        if ($minLatitude > 180) {
+        if ($minLatitude > Vertex::MAX_LATITUDE) {
             throw new ViewBoxOutOfBoundsException('The view box is unnecessarily rotated. Use a minLongitude of "' . (($minLatitude + 180) % 360 - 180) . '" instead to achieve the same view.');
         }
 
@@ -76,7 +76,7 @@ class ViewBox
      */
     public function setMaxLatitude(float $maxLatitude): self
     {
-        if ($maxLatitude < -180) {
+        if ($maxLatitude < Vertex::MIN_LATITUDE) {
             throw new ViewBoxOutOfBoundsException('The view box is unnecessarily rotated. Use a maxLongitude of "' . (($maxLatitude - 180) % 360 + 180) . '" instead to achieve the same view.');
         }
 
