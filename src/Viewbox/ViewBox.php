@@ -2,6 +2,7 @@
 
 namespace PrinsFrank\PhpGeoSVG\Viewbox;
 
+use PrinsFrank\PhpGeoSVG\Exception\ViewBoxOutOfBoundsException;
 use PrinsFrank\PhpGeoSVG\Vertex\Vertex;
 
 class ViewBox
@@ -40,5 +41,47 @@ class ViewBox
     public function getMaxLongitude(): float
     {
         return $this->maxLongitude;
+    }
+
+    public function setMinLongitude(float $minLongitude): self
+    {
+        $this->minLongitude = $minLongitude;
+
+        return $this;
+    }
+
+    public function setMaxLongitude(float $maxLongitude): self
+    {
+        $this->maxLongitude = $maxLongitude;
+
+        return $this;
+    }
+
+    /**
+     * @throws ViewBoxOutOfBoundsException
+     */
+    public function setMinLatitude(float $minLatitude): self
+    {
+        if ($minLatitude > 180) {
+            throw new ViewBoxOutOfBoundsException('The view box is unnecessarily rotated. Use a minLongitude of "' . (($minLatitude + 180) % 360 - 180) . '" instead to achieve the same view.');
+        }
+
+        $this->minLatitude = $minLatitude;
+
+        return $this;
+    }
+
+    /**
+     * @throws ViewBoxOutOfBoundsException
+     */
+    public function setMaxLatitude(float $maxLatitude): self
+    {
+        if ($maxLatitude < -180) {
+            throw new ViewBoxOutOfBoundsException('The view box is unnecessarily rotated. Use a maxLongitude of "' . (($maxLatitude - 180) % 360 + 180) . '" instead to achieve the same view.');
+        }
+
+        $this->maxLatitude = $maxLatitude;
+
+        return $this;
     }
 }
