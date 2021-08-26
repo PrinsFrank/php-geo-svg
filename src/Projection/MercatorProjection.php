@@ -2,18 +2,53 @@
 
 namespace PrinsFrank\PhpGeoSVG\Projection;
 
+use PrinsFrank\PhpGeoSVG\Vertex\Vertex;
 use PrinsFrank\PhpGeoSVG\Viewbox\ViewBox;
 
 class MercatorProjection implements Projection
 {
     public function __construct(private ViewBox $viewBox) { }
 
-    /** @return float[] */
-    public function project(float $longitude, float $latitude): array
+    public function getX(float $longitude, float $latitude): float
     {
-        return [
-            ($longitude+180)*($this->viewBox->getWidth()/360),
-            ($this->viewBox->getHeight()/2)-($this->viewBox->getWidth()*log(tan((M_PI/4)+(($latitude*M_PI/180)/2)))/(2*M_PI))
-        ];
+        return ($longitude+180)*($this->getMaxX()/360);
+    }
+
+    public function getY(float $longitude, float $latitude): float
+    {
+        if ($latitude > Vertex::MAX_LATITUDE - 0.001) {
+            $latitude = Vertex::MAX_LATITUDE - 0.001;
+        }
+
+        if ($latitude < Vertex::MIN_LATITUDE + 0.001) {
+            $latitude = Vertex::MIN_LATITUDE + 0.001;
+        }
+
+        return ($this->getMaxY()/2)-($this->getMaxX()*log(tan((M_PI/4)+(($latitude*M_PI/180)/2)))/(2*M_PI));
+    }
+
+    public function getMinX(): float
+    {
+        return 0;
+    }
+
+    public function getMaxX(): float
+    {
+        return $this->viewBox->getWidth() * .5;
+    }
+
+    public function getMinY(): float
+    {
+        return 0;
+    }
+
+    public function getMaxY(): float
+    {
+        return $this->viewBox->getHeight();
+    }
+
+    public function getCoordinatesTransformation(): ?string
+    {
+        return null;
     }
 }

@@ -15,12 +15,12 @@ class ViewBox
 
     public function getWidth(): float
     {
-        return $this->maxLatitude - $this->minLatitude;
+        return $this->maxLongitude - $this->minLongitude;
     }
 
     public function getHeight(): float
     {
-        return $this->maxLongitude - $this->minLongitude;
+        return $this->maxLatitude - $this->minLatitude;
     }
 
     public function getMinLatitude(): float
@@ -43,15 +43,29 @@ class ViewBox
         return $this->maxLongitude;
     }
 
+    /**
+     * @throws ViewBoxOutOfBoundsException
+     */
     public function setMinLongitude(float $minLongitude): self
     {
+        if ($minLongitude < Vertex::MIN_LONGITUDE) {
+            throw new ViewBoxOutOfBoundsException('The minimum Longitude is "' . Vertex::MIN_LONGITUDE . '"');
+        }
+
         $this->minLongitude = $minLongitude;
 
         return $this;
     }
 
+    /**
+     * @throws ViewBoxOutOfBoundsException
+     */
     public function setMaxLongitude(float $maxLongitude): self
     {
+        if ($maxLongitude > Vertex::MAX_LONGITUDE) {
+            throw new ViewBoxOutOfBoundsException('The maximum Longitude is "' . Vertex::MIN_LONGITUDE . '"');
+        }
+
         $this->maxLongitude = $maxLongitude;
 
         return $this;
