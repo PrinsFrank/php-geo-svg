@@ -23,6 +23,16 @@ class ViewBox
         return $this->maxLatitude - $this->minLatitude;
     }
 
+    public function getMinX(): float
+    {
+        return $this->minLongitude - Vertex::MIN_LONGITUDE;
+    }
+
+    public function getMinY(): float
+    {
+        return Vertex::MAX_LATITUDE - $this->maxLatitude;
+    }
+
     public function getMinLatitude(): float
     {
         return $this->minLatitude;

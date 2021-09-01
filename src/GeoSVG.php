@@ -7,14 +7,11 @@ use PrinsFrank\PhpGeoSVG\Viewbox\ViewBox;
 
 class GeoSVG
 {
-    public ?Viewbox $viewbox;
-
     /** @var array<PolygonSet> */
     public array $multiPolygons;
 
-    public function __construct()
+    public function __construct(public ?ViewBox $viewbox)
     {
-        $this->viewbox = (new ViewBox());
     }
 
     public function addPolygonSet(PolygonSet $multiPolygon): self

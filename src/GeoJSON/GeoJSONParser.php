@@ -15,7 +15,7 @@ class GeoJSONParser
      */
     public static function getPolygons(String $geoJSON): GeoSVG
     {
-        $GeoSVG = new GeoSVG();
+        $GeoSVG = new GeoSVG(null);
         $GeoJSON = json_decode($geoJSON, true, 512, JSON_THROW_ON_ERROR);
         foreach($GeoJSON['features'] as $feature) {
             foreach ($feature['geometry']['type'] === 'Polygon' ? [$feature['geometry']['coordinates']] : $feature['geometry']['coordinates'] as $territories) {

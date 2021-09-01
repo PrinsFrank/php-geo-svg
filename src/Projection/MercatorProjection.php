@@ -3,12 +3,9 @@
 namespace PrinsFrank\PhpGeoSVG\Projection;
 
 use PrinsFrank\PhpGeoSVG\Vertex\Vertex;
-use PrinsFrank\PhpGeoSVG\Viewbox\ViewBox;
 
 class MercatorProjection implements Projection
 {
-    public function __construct(private ViewBox $viewBox) { }
-
     public function getX(float $longitude, float $latitude): float
     {
         return ($longitude+180)*($this->getMaxX()/360);
@@ -29,11 +26,11 @@ class MercatorProjection implements Projection
 
     public function getMaxX(): float
     {
-        return $this->viewBox->getWidth() * .5;
+        return Vertex::TOTAL_LONGITUDE * .5;
     }
 
     public function getMaxY(): float
     {
-        return $this->viewBox->getHeight();
+        return Vertex::TOTAL_LATITUDE;
     }
 }
