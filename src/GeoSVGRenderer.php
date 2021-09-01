@@ -2,8 +2,8 @@
 
 namespace PrinsFrank\PhpGeoSVG;
 
-use PrinsFrank\PhpGeoSVG\MultiPolygon\MultiPolygon;
-use PrinsFrank\PhpGeoSVG\MultiPolygon\MultiPolygonRenderer;
+use PrinsFrank\PhpGeoSVG\PolygonSet\PolygonSet;
+use PrinsFrank\PhpGeoSVG\PolygonSet\PolygonSetRenderer;
 use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
 class GeoSVGRenderer
@@ -24,8 +24,8 @@ class GeoSVGRenderer
                 'preserveAspectRatio="xMidYMid slice" ' .
                 'viewBox="0 0 ' . $projection->getMaxX() . ' ' . $projection->getMaxY() . '">'. PHP_EOL .
                 '<g class="countries">' . PHP_EOL .
-                    implode(PHP_EOL, array_map(static function (MultiPolygon $multiPolygon) use ($projection) {
-                        return MultiPolygonRenderer::render($projection, $multiPolygon);
+                    implode(PHP_EOL, array_map(static function (PolygonSet $multiPolygon) use ($projection) {
+                        return PolygonSetRenderer::render($projection, $multiPolygon);
                     }, $this->geoSVG->multiPolygons)) . PHP_EOL .
                 '</g>' . PHP_EOL .
             '</svg>'

@@ -1,14 +1,14 @@
 <?php
 
-namespace PrinsFrank\PhpGeoSVG\MultiPolygon;
+namespace PrinsFrank\PhpGeoSVG\PolygonSet;
 
 use PrinsFrank\PhpGeoSVG\Polygon\Polygon;
 use PrinsFrank\PhpGeoSVG\Polygon\PolygonRenderer;
 use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
-class MultiPolygonRenderer
+class PolygonSetRenderer
 {
-    public static function render(Projection $projection, MultiPolygon $multiPolygon): string
+    public static function render(Projection $projection, PolygonSet $multiPolygon): string
     {
         return
             '<g>' .

@@ -2,14 +2,14 @@
 
 namespace PrinsFrank\PhpGeoSVG;
 
-use PrinsFrank\PhpGeoSVG\MultiPolygon\MultiPolygon;
+use PrinsFrank\PhpGeoSVG\PolygonSet\PolygonSet;
 use PrinsFrank\PhpGeoSVG\Viewbox\ViewBox;
 
 class GeoSVG
 {
     public ?Viewbox $viewbox;
 
-    /** @var array<MultiPolygon> */
+    /** @var array<PolygonSet> */
     public array $multiPolygons;
 
     public function __construct()
@@ -17,7 +17,7 @@ class GeoSVG
         $this->viewbox = (new ViewBox());
     }
 
-    public function addMultiPolygon(MultiPolygon $multiPolygon): self
+    public function addPolygonSet(PolygonSet $multiPolygon): self
     {
         $this->multiPolygons[] = $multiPolygon;
 
