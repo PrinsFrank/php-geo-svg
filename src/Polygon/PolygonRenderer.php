@@ -7,7 +7,7 @@ use PrinsFrank\PhpGeoSVG\Vertex\Vertex;
 
 class PolygonRenderer
 {
-    public static function render(Projection $projection, Polygon $polygon): string
+    public static function render(Polygon $polygon, Projection $projection): string
     {
         return
             '<path ' .

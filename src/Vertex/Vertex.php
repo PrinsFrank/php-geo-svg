@@ -6,11 +6,13 @@ use RuntimeException;
 
 class Vertex
 {
-    public const MIN_LONGITUDE = -180;
-    public const MAX_LONGITUDE = 180;
+    public const MIN_LONGITUDE   = -180;
+    public const MAX_LONGITUDE   = 180;
+    public const TOTAL_LONGITUDE = self::MAX_LONGITUDE - self::MIN_LONGITUDE;
 
-    public const MIN_LATITUDE  = -90;
-    public const MAX_LATITUDE  = 90;
+    public const MIN_LATITUDE   = -90;
+    public const MAX_LATITUDE   = 90;
+    public const TOTAL_LATITUDE = self::MAX_LATITUDE - self::MIN_LATITUDE;
 
     public function __construct(public float $longitude, public float $latitude)
     {

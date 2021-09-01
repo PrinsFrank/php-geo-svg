@@ -8,12 +8,12 @@ use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
 class PolygonSetRenderer
 {
-    public static function render(Projection $projection, PolygonSet $multiPolygon): string
+    public static function render(PolygonSet $multiPolygon, Projection $projection): string
     {
         return
             '<g>' .
                 implode('', array_map(static function(Polygon $polygon) use ($projection) {
-                    return PolygonRenderer::render($projection, $polygon);
+                    return PolygonRenderer::render($polygon, $projection);
                 }, $multiPolygon->polygons)) .
                 '<title>' . $multiPolygon->title . '</title>' . PHP_EOL .
             '</g>'
