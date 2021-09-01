@@ -27,28 +27,13 @@ class MercatorProjection implements Projection
         return ($this->getMaxY()/2)-($this->getMaxX()*log(tan((M_PI/4)+(($latitude*M_PI/180)/2)))/(2*M_PI));
     }
 
-    public function getMinX(): float
-    {
-        return 0;
-    }
-
     public function getMaxX(): float
     {
         return $this->viewBox->getWidth() * .5;
     }
 
-    public function getMinY(): float
-    {
-        return 0;
-    }
-
     public function getMaxY(): float
     {
         return $this->viewBox->getHeight();
-    }
-
-    public function getCoordinatesTransformation(): ?string
-    {
-        return null;
     }
 }

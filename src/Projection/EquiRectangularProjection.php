@@ -10,36 +10,21 @@ class EquiRectangularProjection implements Projection
 
     public function getX(float $longitude, float $latitude): float
     {
-        return $longitude;
+        return $longitude - $this->viewBox->getMinLongitude();
     }
 
     public function getY(float $longitude, float $latitude): float
     {
-        return $latitude;
-    }
-
-    public function getMinX(): float
-    {
-        return $this->viewBox->getMinLongitude();
+        return - $latitude - $this->viewBox->getMinLatitude();
     }
 
     public function getMaxX(): float
     {
-        return $this->viewBox->getMaxLongitude();
-    }
-
-    public function getMinY(): float
-    {
-        return $this->viewBox->getMinLatitude();
+        return $this->viewBox->getMaxLongitude() - $this->viewBox->getMinLongitude();
     }
 
     public function getMaxY(): float
     {
-        return $this->viewBox->getMaxLatitude();
-    }
-
-    public function getCoordinatesTransformation(): ?string
-    {
-        return 'matrix(1 0 0 -1 0 0)';
+        return $this->viewBox->getMaxLatitude() - $this->viewBox->getMinLatitude();
     }
 }

@@ -19,13 +19,11 @@ class GeoSVGRenderer
             '<svg ' .
                 'xmlns="' . self::XMLNS . '" ' .
                 'version="' . self::VERSION . '" ' .
-                'width="' .  $projection->getMaxX() - $projection->getMinX() . '" ' .
-                'height="' . $projection->getMaxY() - $projection->getMinY() . '" ' .
+                'width="' .  $projection->getMaxX() . '" ' .
+                'height="' . $projection->getMaxY() . '" ' .
                 'preserveAspectRatio="xMidYMid slice" ' .
-                'viewBox="' . $projection->getMinX() . ' ' . $projection->getMinY() . ' '
-                    . $projection->getMaxX() - $projection->getMinX() . ' '
-                    . $projection->getMaxY() - $projection->getMinY() . '">'. PHP_EOL .
-                '<g class="countries" transform="' . $projection->getCoordinatesTransformation() . '">' . PHP_EOL .
+                'viewBox="0 0 ' . $projection->getMaxX() . ' ' . $projection->getMaxY() . '">'. PHP_EOL .
+                '<g class="countries">' . PHP_EOL .
                     implode(PHP_EOL, array_map(static function (MultiPolygon $multiPolygon) use ($projection) {
                         return MultiPolygonRenderer::render($projection, $multiPolygon);
                     }, $this->geoSVG->multiPolygons)) . PHP_EOL .
