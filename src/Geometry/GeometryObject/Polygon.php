@@ -8,6 +8,6 @@ class Polygon implements GeometryObject
 {
     protected LineString $exteriorRing;
 
-    /** @var LineString[] */
+    /** @var LineString[] elements representing interior rings (or holes) */
     protected array $interiorRings;
 }
