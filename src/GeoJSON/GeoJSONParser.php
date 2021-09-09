@@ -3,34 +3,35 @@
 namespace PrinsFrank\PhpGeoSVG\GeoJSON;
 
 use JsonException;
-use PrinsFrank\PhpGeoSVG\GeoSVG;
-use PrinsFrank\PhpGeoSVG\PolygonSet\PolygonSet;
-use PrinsFrank\PhpGeoSVG\Polygon\Polygon;
-use PrinsFrank\PhpGeoSVG\Vertex\Vertex;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPolygon;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
+use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
 class GeoJSONParser
 {
     /**
      * @throws JsonException
      */
-    public static function getPolygons(String $geoJSON): GeoSVG
+    public static function getPolygons(String $geoJSON): GeometryCollection
     {
-        $GeoSVG = new GeoSVG(null);
+        $geometryCollection = new GeometryCollection();
         $GeoJSON = json_decode($geoJSON, true, 512, JSON_THROW_ON_ERROR);
         foreach($GeoJSON['features'] as $feature) {
             foreach ($feature['geometry']['type'] === 'Polygon' ? [$feature['geometry']['coordinates']] : $feature['geometry']['coordinates'] as $territories) {
-                $multiPolygon = new PolygonSet($feature['properties']['NAME']);
+                $multiPolygon = new MultiPolygon($feature['properties']['NAME']);
                 foreach($territories as $territory) {
-                    $polygon = new Polygon();
+                    $exteriorRing = new LineString();
                     foreach($territory as $coordinates) {
-                        $polygon->addVertex(new Vertex($coordinates[0], $coordinates[1]));
+                        $exteriorRing->addPosition(new Position($coordinates[0], $coordinates[1]));
                     }
-                    $multiPolygon->addPolygon($polygon);
+                    $multiPolygon->addPolygon(new Polygon($exteriorRing));
                 }
-                $GeoSVG->addPolygonSet($multiPolygon);
+                $geometryCollection->addGeometryObject($multiPolygon);
             }
         }
 
-        return $GeoSVG;
+        return $geometryCollection;
     }
 }

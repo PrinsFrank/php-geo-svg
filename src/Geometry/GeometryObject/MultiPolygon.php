@@ -8,4 +8,11 @@ class MultiPolygon implements GeometryObject
 {
     /** @var Polygon[] */
     protected array $polygons;
+
+    public function addPolygon(Polygon $polygon): self
+    {
+        $this->polygons[] = $polygon;
+
+        return $this;
+    }
 }

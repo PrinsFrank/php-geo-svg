@@ -10,4 +10,11 @@ class LineString implements GeometryObject
 {
     /** @var Position[] */
     protected array $positions;
+
+    public function addPosition(Position $position): self
+    {
+        $this->positions[] = $position;
+
+        return $this;
+    }
 }

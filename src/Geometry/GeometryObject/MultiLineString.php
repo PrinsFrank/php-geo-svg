@@ -8,4 +8,11 @@ class MultiLineString implements GeometryObject
 {
     /** @var LineString[] */
     protected array $lineStrings;
+
+    public function addLineString(LineString $lineString): self
+    {
+        $this->lineStrings[] = $lineString;
+
+        return $this;
+    }
 }

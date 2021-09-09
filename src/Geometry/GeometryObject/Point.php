@@ -8,5 +8,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
 class Point implements GeometryObject
 {
-    protected Position $position;
+    public function __construct(protected Position $position)
+    {
+    }
 }
