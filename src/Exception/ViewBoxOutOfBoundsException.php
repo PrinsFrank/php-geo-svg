@@ -2,8 +2,6 @@
 
 namespace PrinsFrank\PhpGeoSVG\Exception;
 
-use Exception;
-
-class ViewBoxOutOfBoundsException extends Exception
+class ViewBoxOutOfBoundsException extends PhpGeoSVGException
 {
 }

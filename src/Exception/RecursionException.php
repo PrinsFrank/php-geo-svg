@@ -2,8 +2,6 @@
 
 namespace PrinsFrank\PhpGeoSVG\Exception;
 
-use Exception;
-
-class RecursionException extends Exception
+class RecursionException extends PhpGeoSVGException
 {
 }
