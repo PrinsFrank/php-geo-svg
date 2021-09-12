@@ -33,7 +33,7 @@ abstract class Element
         return $this->attributes;
     }
 
-    public function setAttribute(string $name, string $value): self
+    public function setAttribute(string $name, mixed $value): self
     {
         $this->attributes[$name] = $value;
 
