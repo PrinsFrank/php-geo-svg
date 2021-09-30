@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
-class MultiLineString implements GeometryObject
+class MultiLineString extends GeometryObject
 {
     /** @var LineString[] */
     protected array $lineStrings;

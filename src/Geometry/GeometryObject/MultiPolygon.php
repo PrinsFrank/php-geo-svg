@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
-class MultiPolygon implements GeometryObject
+class MultiPolygon extends GeometryObject
 {
     /** @var Polygon[] */
     protected array $polygons;

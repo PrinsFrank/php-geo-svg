@@ -6,7 +6,7 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
-class MultiPoint implements GeometryObject
+class MultiPoint extends GeometryObject
 {
     /** @var Position[] */
     protected array $positions;

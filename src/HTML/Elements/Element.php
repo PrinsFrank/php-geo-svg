@@ -2,13 +2,16 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
 
+use PrinsFrank\PhpGeoSVG\HTML\Elements\Text\TextContent;
+
 abstract class Element
 {
     /** @var Element[] */
     protected array $childElements = [];
 
     /** @var array<string, string> */
-    protected array $attributes = [];
+    protected array      $attributes = [];
+    private ?TextContent $textContent = null;
 
     public function addChildElement(Element $childElement): self
     {
@@ -36,6 +39,13 @@ abstract class Element
     public function setAttribute(string $name, mixed $value): self
     {
         $this->attributes[$name] = $value;
+
+        return $this;
+    }
+
+    public function setTextContent(?TextContent $textContent): self
+    {
+        $this->textContent = $textContent;
 
         return $this;
     }

@@ -6,7 +6,7 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
-class LineString implements GeometryObject
+class LineString extends GeometryObject
 {
     /** @var Position[] */
     protected array $positions;
