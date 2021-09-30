@@ -12,15 +12,15 @@ class ElementRenderer
     /**
      * @throws RecursionException
      */
-    public static function renderElement(Element $element, int $depth): string
+    public static function renderElement(Element $element, int $currentDepth = 0): string
     {
-        if ($depth++ > self::RECURSION_LIMIT) {
+        if ($currentDepth++ > self::RECURSION_LIMIT) {
             throw new RecursionException('Recursion limit of ' . self::RECURSION_LIMIT . ' Reached');
         }
 
         $elementContent = null;
         foreach ($element->getChildElements() as $childElement) {
-            $elementContent .= self::renderElement($childElement, $depth);
+            $elementContent .= self::renderElement($childElement, $currentDepth);
         }
 
         return '<' . $element->getTagName() . AttributeRenderer::renderAttributes($element->getAttributes()) . '>' .
