@@ -20,13 +20,13 @@ class BoundingBox
 
         if ($this->southWestern->longitude > Position::MAX_LONGITUDE) {
             throw new InvalidBoundingBoxException(
-                'The view box is unnecessarily rotated. Use a minLongitude of "' . (($this->southWestern->longitude + 180) % 360 - 180) . '" instead to achieve the same view.'
+                'The bounding box is unnecessarily rotated. Use a minLongitude of "' . (($this->southWestern->longitude + 180) % 360 - 180) . '" instead to achieve the same bound.'
             );
         }
 
         if ($this->northEastern->longitude < Position::MIN_LONGITUDE) {
             throw new InvalidBoundingBoxException(
-                'The view box is unnecessarily rotated. Use a maxLongitude of "' . (($this->northEastern->longitude - 180) % 360 + 180) . '" instead to achieve the same view.'
+                'The bounding box is unnecessarily rotated. Use a maxLongitude of "' . (($this->northEastern->longitude - 180) % 360 + 180) . '" instead to achieve the same bound.'
             );
         }
 
