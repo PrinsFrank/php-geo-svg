@@ -7,10 +7,14 @@ class AttributeRenderer
     /**
      * @param array<string, string> $attributes
      */
-    public static function renderAttributes(array $attributes): string
+    public static function renderAttributes(array $attributes): ?string
     {
-        $attributesString = '';
+        $attributesString = null;
         foreach($attributes as $attribute => $value) {
+            if ($attributesString !== null) {
+                $attributesString .= ' ';
+            }
+
             $attributesString .= self::renderAttribute($attribute, $value);
         }
 

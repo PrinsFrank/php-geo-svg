@@ -23,7 +23,8 @@ class ElementRenderer
             $elementContent .= self::renderElement($childElement, $currentDepth);
         }
 
-        return '<' . $element->getTagName() . AttributeRenderer::renderAttributes($element->getAttributes()) . '>' .
+        $attributeString = AttributeRenderer::renderAttributes($element->getAttributes());
+        return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '>' .
             $elementContent .
         '</' . $element->getTagName() . '>';
     }
