@@ -17,4 +17,12 @@ class MultiPoint extends GeometryObject
 
         return $this;
     }
+
+    /**
+     * @return Position[]
+     */
+    public function getPositions(): array
+    {
+        return $this->positions;
+    }
 }

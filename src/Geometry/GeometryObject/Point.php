@@ -11,4 +11,9 @@ class Point extends GeometryObject
     public function __construct(protected Position $position)
     {
     }
+
+    public function getPosition(): Position
+    {
+        return $this->position;
+    }
 }

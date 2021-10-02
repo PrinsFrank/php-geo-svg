@@ -19,4 +19,17 @@ class Polygon extends GeometryObject
 
         return $this;
     }
+
+    public function getExteriorRing(): LineString
+    {
+        return $this->exteriorRing;
+    }
+
+    /**
+     * @return LineString[]
+     */
+    public function getInteriorRings(): array
+    {
+        return $this->interiorRings;
+    }
 }

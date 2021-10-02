@@ -15,4 +15,12 @@ class MultiPolygon extends GeometryObject
 
         return $this;
     }
+
+    /**
+     * @return Polygon[]
+     */
+    public function getPolygons(): array
+    {
+        return $this->polygons;
+    }
 }

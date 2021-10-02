@@ -15,4 +15,12 @@ class MultiLineString extends GeometryObject
 
         return $this;
     }
+
+    /**
+     * @return LineString[]
+     */
+    public function getLineStrings(): array
+    {
+        return $this->lineStrings;
+    }
 }
