@@ -3,11 +3,13 @@
 namespace PrinsFrank\PhpGeoSVG;
 
 use PrinsFrank\PhpGeoSVG\Coordinator\Coordinator;
+use PrinsFrank\PhpGeoSVG\Exception\PhpGeoSVGException;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
+use PrinsFrank\PhpGeoSVG\HTML\Factory\ElementFactory;
 use PrinsFrank\PhpGeoSVG\HTML\Rendering\ElementRenderer;
-use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
+use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
 class GeoSVG
@@ -26,7 +28,7 @@ class GeoSVG
     public function getProjection(): Projection
     {
         if ($this->projection === null) {
-            $this->projection = new MercatorProjection();
+            $this->projection = new EquiRectangularProjection();
         }
 
         return $this->projection;
@@ -52,12 +54,12 @@ class GeoSVG
     }
 
     /**
-     * @throws Exception\RecursionException
+     * @throws PhpGeoSVGException
      */
     public function render(GeometryCollection $geometryCollection): string
     {
-        $coordinator = new Coordinator($this->getProjection(), $this->getBoundingBox());
-
-        return ElementRenderer::renderElement($geometryCollection);
+        return ElementRenderer::renderElement(
+            ElementFactory::buildForGeometryCollection($geometryCollection, new Coordinator($this->getProjection(), $this->getBoundingBox()))
+        );
     }
 }
