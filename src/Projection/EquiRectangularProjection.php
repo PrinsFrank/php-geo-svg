@@ -6,14 +6,14 @@ use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
 class EquiRectangularProjection implements Projection
 {
-    public function getX(float $longitude, float $latitude): float
+    public function getX(Position $position): float
     {
-        return $longitude - Position::MIN_LONGITUDE;
+        return $position->longitude - Position::MIN_LONGITUDE;
     }
 
-    public function getY(float $longitude, float $latitude): float
+    public function getY(Position $position): float
     {
-        return - $latitude - Position::MIN_LATITUDE;
+        return - $position->latitude - Position::MIN_LATITUDE;
     }
 
     public function getMaxX(): float

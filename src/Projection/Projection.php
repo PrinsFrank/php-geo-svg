@@ -2,11 +2,13 @@
 
 namespace PrinsFrank\PhpGeoSVG\Projection;
 
+use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
+
 interface Projection
 {
-    public function getX(float $longitude, float $latitude): float;
+    public function getX(Position $position): float;
 
-    public function getY(float $longitude, float $latitude): float;
+    public function getY(Position $position): float;
 
     public function getMaxX(): float;
 
