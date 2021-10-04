@@ -14,17 +14,27 @@ class Coordinator
     {
     }
 
+    public function getWidth(): float
+    {
+        return $this->boundingBox->getWidth();
+    }
+
+    public function getHeight(): float
+    {
+        return $this->boundingBox->getHeight();
+    }
+
     public function getX(Position $position): float
     {
         $projectedX = $this->projection->getX($position);
 
-        return $projectedX;
+        return $this->boundingBox->boundX($projectedX);
     }
 
     public function getY(Position $position): float
     {
         $projectedY = $this->projection->getY($position);
 
-        return $projectedY;
+        return $this->boundingBox->boundY($projectedY);
     }
 }

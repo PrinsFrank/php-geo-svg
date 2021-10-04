@@ -29,9 +29,9 @@ class ElementFactory
     public static function buildForGeometryCollection(GeometryCollection $geometryCollection, Coordinator $coordinator): Element
     {
         $svgElement = (new SvgElement())
-            ->setAttribute('width', 360)
-            ->setAttribute('height', 180)
-            ->setAttribute('viewbox', '0 0 360 180');
+            ->setAttribute('width', $coordinator->getWidth())
+            ->setAttribute('height', $coordinator->getHeight())
+            ->setAttribute('viewbox', '0 0 ' . $coordinator->getWidth() . ' ' . $coordinator->getHeight());
 
         foreach ($geometryCollection->getGeometryObjects() as $geometryObject) {
             $svgElement->addChildElement(self::buildForGeometryObject($geometryObject, $coordinator));

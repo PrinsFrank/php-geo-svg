@@ -38,4 +38,24 @@ class BoundingBox
             throw new InvalidBoundingBoxException('The maximum Latitude is "' . Position::MIN_LATITUDE . '"');
         }
     }
+
+    public function getWidth(): float
+    {
+        return - $this->southWestern->longitude + $this->northEastern->longitude;
+    }
+
+    public function getHeight(): float
+    {
+        return - $this->southWestern->latitude + $this->northEastern->latitude;
+    }
+
+    public function boundX(float $projectedX): float
+    {
+        return $projectedX;
+    }
+
+    public function boundY(float $projectedY): float
+    {
+        return $projectedY;
+    }
 }
