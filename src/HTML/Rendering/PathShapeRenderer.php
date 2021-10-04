@@ -2,6 +2,7 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Rendering;
 
+use PrinsFrank\PhpGeoSVG\Coordinator\Coordinator;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
 
 class PathShapeRenderer
@@ -17,7 +18,7 @@ class PathShapeRenderer
     public const SHORT_QUADRATIC_CURVE = 'T';
     public const ARC                   = 'A';
 
-    public static function renderLineStringPath(LineString $lineString): string
+    public static function renderLineStringPath(LineString $lineString, Coordinator $coordinator): string
     {
         $renderedLineString = '';
         foreach ($lineString->getPositions() as $key => $position) {
@@ -27,7 +28,7 @@ class PathShapeRenderer
                 $renderedLineString .= ' ' . self::LINE_TO;
             }
 
-            $renderedLineString .= $position->longitude . ' ' . $position->latitude;
+            $renderedLineString .= $coordinator->getX($position) . ' ' . $coordinator->getY($position);
         }
 
         return $renderedLineString;
