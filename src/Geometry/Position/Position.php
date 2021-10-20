@@ -33,11 +33,11 @@ class Position
     public function __construct(public float $longitude, public float $latitude, public ?float $elevation = null)
     {
         if ($this->longitude > self::MAX_LONGITUDE || $this->longitude < self::MIN_LONGITUDE) {
-            throw new InvalidPositionException('The latitude should be between ' . self::MIN_LONGITUDE . ' and ' . self::MAX_LONGITUDE);
+            throw new InvalidPositionException('The longitude should be between ' . self::MIN_LONGITUDE . ' and ' . self::MAX_LONGITUDE . ', "' . $this->longitude . '" provided.');
         }
 
         if ($this->latitude > self::MAX_LATITUDE || $this->latitude < self::MIN_LATITUDE) {
-            throw new InvalidPositionException('The longitude should be between ' . self::MIN_LATITUDE . ' and ' . self::MAX_LATITUDE);
+            throw new InvalidPositionException('The latitude should be between ' . self::MIN_LATITUDE . ' and ' . self::MAX_LATITUDE . ', "' . $this->latitude . '" provided.');
         }
     }
 
