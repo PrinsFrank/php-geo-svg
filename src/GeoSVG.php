@@ -62,4 +62,12 @@ class GeoSVG
             ElementFactory::buildForGeometryCollection($geometryCollection, new Coordinator($this->getProjection(), $this->getBoundingBox()))
         );
     }
+
+    /**
+     * @throws PhpGeoSVGException
+     */
+    public function toFile(GeometryCollection $geometryCollection, string $path): void
+    {
+        file_put_contents($path, $this->render($geometryCollection));
+    }
 }
