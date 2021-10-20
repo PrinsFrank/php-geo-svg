@@ -3,13 +3,14 @@
 namespace PrinsFrank\PhpGeoSVG\Geometry;
 
 use JsonException;
+use PrinsFrank\PhpGeoSVG\Exception\InvalidPositionException;
 use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\GeometryObjectFactory;
 
 class GeometryCollectionFactory
 {
     /**
-     * @throws NotImplementedException
+     * @throws NotImplementedException|InvalidPositionException
      */
     public static function createFromGeoJSONArray(array $geoJSONArray): GeometryCollection
     {
@@ -23,14 +24,19 @@ class GeometryCollectionFactory
                 throw new NotImplementedException('Only features of type "Feature" are supported.');
             }
 
-            $geometryCollection->addGeometryObject(GeometryObjectFactory::createForGeoJsonFeatureGeometry($feature['geometry']));
+            $geometryObject = GeometryObjectFactory::createForGeoJsonFeatureGeometry($feature['geometry']);
+            if ($geometryObject === null) {
+                continue;
+            }
+
+            $geometryCollection->addGeometryObject($geometryObject);
         }
 
         return $geometryCollection;
     }
 
     /**
-     * @throws JsonException|NotImplementedException
+     * @throws JsonException|NotImplementedException|InvalidPositionException
      */
     public static function createFromGeoJsonString(string $geoJsonString): GeometryCollection
     {
@@ -38,7 +44,7 @@ class GeometryCollectionFactory
     }
 
     /**
-     * @throws JsonException|NotImplementedException
+     * @throws JsonException|NotImplementedException|InvalidPositionException
      */
     public static function createFromGeoJSONFilePath(string $path): GeometryCollection
     {

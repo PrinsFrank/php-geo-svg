@@ -12,7 +12,7 @@ class GeometryObjectFactory
      * @throws NotImplementedException
      * @throws InvalidPositionException
      */
-    public static function createForGeoJsonFeatureGeometry(array $featureGeometry): GeometryObject
+    public static function createForGeoJsonFeatureGeometry(array $featureGeometry): ?GeometryObject
     {
         return match ($featureGeometry['type']) {
             'LineString' => self::createForLineStringCoordinates($featureGeometry['coordinates']),
@@ -63,7 +63,12 @@ class GeometryObjectFactory
     {
         $multiPolygon = new MultiPolygon();
         foreach($coordinates as $polygonCoordinates) {
-            $multiPolygon->addPolygon(self::createForPolygonCoordinates($polygonCoordinates));
+            $polygon = self::createForPolygonCoordinates($polygonCoordinates);
+            if ($polygon === null) {
+                continue;
+            }
+
+            $multiPolygon->addPolygon($polygon);
         }
 
         return $multiPolygon;
