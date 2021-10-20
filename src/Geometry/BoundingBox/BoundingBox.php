@@ -37,6 +37,14 @@ class BoundingBox
         if ($this->northEastern->latitude > Position::MAX_LATITUDE) {
             throw new InvalidBoundingBoxException('The maximum Latitude is "' . Position::MIN_LATITUDE . '"');
         }
+
+        if ($this->northEastern->latitude < $this->southWestern->latitude) {
+            throw new InvalidBoundingBoxException('The latitude of the NorthEastern coordinate (' . $this->northEastern->latitude . ') is south of the SouthWestern coordinate (' . $this->southWestern->latitude . ')');
+        }
+
+        if ($this->northEastern->longitude < $this->southWestern->longitude) {
+            throw new InvalidBoundingBoxException('The longitude of the NorthEastern coordinate (' . $this->northEastern->longitude . ') is west of the SouthWestern coordinate (' . $this->southWestern->longitude . ')');
+        }
     }
 
     public function getWidth(): float
