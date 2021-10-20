@@ -47,7 +47,7 @@ class GeoSVG
     public function getBoundingBox(): BoundingBox
     {
         if ($this->boundingBox === null) {
-            $this->boundingBox = new BoundingBox(new Position(-180, 90), new Position(180, -90));
+            $this->boundingBox = new BoundingBox(new Position(-180, -90), new Position(180, 90));
         }
 
         return $this->boundingBox;
