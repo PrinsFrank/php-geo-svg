@@ -80,19 +80,16 @@ class GeometryObjectFactory
     /**
      * @throws InvalidPositionException
      */
-    public static function createForPolygonCoordinates(array $coordinates): Polygon
+    public static function createForPolygonCoordinates(array $coordinates): ?Polygon
     {
-        $polygon = new Polygon();
-        foreach (array_values($coordinates) as $key => $lineStringData) {
-            $lineString = self::createForLineStringCoordinates($lineStringData);
+        $exteriorCoordinates = array_shift($coordinates);
+        if ($exteriorCoordinates === null) {
+            return null;
+        }
 
-            if ($key === 0) {
-                $polygon->setExteriorRing($lineString);
-
-                continue;
-            }
-
-            $polygon->addInteriorRing($lineString);
+        $polygon = new Polygon(self::createForLineStringCoordinates($exteriorCoordinates));
+        foreach ($coordinates as $lineStringData) {
+            $polygon->addInteriorRing(self::createForLineStringCoordinates($lineStringData));
         }
 
         return $polygon;
