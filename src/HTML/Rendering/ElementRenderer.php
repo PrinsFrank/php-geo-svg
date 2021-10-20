@@ -8,6 +8,7 @@ use PrinsFrank\PhpGeoSVG\HTML\Elements\Element;
 class ElementRenderer
 {
     private const RECURSION_LIMIT = 100;
+    private const INDENTING_CHAR  = ' ';
 
     /**
      * @throws RecursionException
@@ -20,12 +21,12 @@ class ElementRenderer
 
         $elementContent = null;
         foreach ($element->getChildElements() as $childElement) {
-            $elementContent .= self::renderElement($childElement, $currentDepth);
+            $elementContent .= str_repeat(self::INDENTING_CHAR, $currentDepth) . self::renderElement($childElement, $currentDepth);
         }
 
         $attributeString = AttributeRenderer::renderAttributes($element->getAttributes());
-        return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '>' .
+        return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '>' . PHP_EOL .
             $elementContent .
-        '</' . $element->getTagName() . '>';
+        str_repeat(self::INDENTING_CHAR, $currentDepth - 1) . '</' . $element->getTagName() . '>' . PHP_EOL;
     }
 }
