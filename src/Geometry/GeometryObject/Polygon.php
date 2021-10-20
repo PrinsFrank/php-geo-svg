@@ -7,7 +7,7 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 class Polygon extends GeometryObject
 {
     /** @var LineString[] elements representing interior rings (or holes) */
-    protected array $interiorRings;
+    protected array $interiorRings = [];
 
     public function __construct(protected LineString $exteriorRing)
     {
