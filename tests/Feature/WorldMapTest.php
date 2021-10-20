@@ -27,10 +27,10 @@ class WorldMapTest extends TestCase
         (new GeoSVG())
             ->toFile(
                 GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . '/ne_110m_admin_0_countries.geojson'),
-                __DIR__ . '/actual/' . $testName . '.html'
+                __DIR__ . '/actual/' . $testName . '.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/' . $testName . '.html', __DIR__ . '/actual/' . $testName . '.html');
+        self::assertFileEquals(__DIR__ . '/expected/' . $testName . '.svg', __DIR__ . '/actual/' . $testName . '.svg');
     }
 
     /**
