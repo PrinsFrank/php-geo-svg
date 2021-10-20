@@ -2,7 +2,11 @@
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Feature;
 
+use JsonException;
 use PHPUnit\Framework\TestCase;
+use PrinsFrank\PhpGeoSVG\Exception\InvalidPositionException;
+use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
+use PrinsFrank\PhpGeoSVG\Exception\PhpGeoSVGException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
 
@@ -10,6 +14,12 @@ class WorldMapTest extends TestCase
 {
     private const GEO_JSON_FOLDER = 'vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/';
 
+    /**
+     * @throws InvalidPositionException
+     * @throws PhpGeoSVGException
+     * @throws NotImplementedException
+     * @throws JsonException
+     */
     public function testGeneratesFromGeoJson(): void
     {
         $testName = 'generated-from-geojson';
@@ -23,6 +33,12 @@ class WorldMapTest extends TestCase
         self::assertFileEquals(__DIR__ . '/expected/' . $testName . '.html', __DIR__ . '/actual/' . $testName . '.html');
     }
 
+    /**
+     * @throws InvalidPositionException
+     * @throws PhpGeoSVGException
+     * @throws NotImplementedException
+     * @throws JsonException
+     */
     public function testSupportsAllGeoJsonFilesInNaturalEarthVectorSet(): void
     {
         $geoJsonFileNames = scandir(dirname(__DIR__, 2) .  '/' .self::GEO_JSON_FOLDER);
