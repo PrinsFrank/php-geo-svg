@@ -22,33 +22,21 @@ class WorldMapTest extends TestCase
      */
     public function testGeneratesFromGeoJson(): void
     {
-        $testName = 'generated-from-geojson';
-
-        (new GeoSVG())
-            ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . '/ne_110m_admin_0_countries.geojson'),
-                __DIR__ . '/actual/' . $testName . '.svg'
-            );
-
-        self::assertFileEquals(__DIR__ . '/expected/' . $testName . '.svg', __DIR__ . '/actual/' . $testName . '.svg');
-    }
-
-    /**
-     * @throws InvalidPositionException
-     * @throws PhpGeoSVGException
-     * @throws NotImplementedException
-     * @throws JsonException
-     */
-    public function testSupportsAllGeoJsonFilesInNaturalEarthVectorSet(): void
-    {
         $geoJsonFileNames = scandir(dirname(__DIR__, 2) .  '/' .self::GEO_JSON_FOLDER);
-        $geoJsonFileNames = array_diff($geoJsonFileNames, ['.', '..']);
+        $geoJsonFileNames = array_filter($geoJsonFileNames, static function ($geoJsonFileName){
+            return str_contains($geoJsonFileName, '110m');
+        });
 
-        static::assertCount(162, $geoJsonFileNames);
+        static::assertCount(32, $geoJsonFileNames);
         foreach ($geoJsonFileNames as $geoJsonFileName) {
+            $baseFileName = substr($geoJsonFileName, 0, -8);
             (new GeoSVG())
-                ->render(GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . $geoJsonFileName));
-            $this->addToAssertionCount(1);
+                ->toFile(
+                    GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . '/' . $geoJsonFileName),
+                    __DIR__ . '/actual/' . $baseFileName . '.svg'
+                );
+
+            self::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
         }
     }
 }
