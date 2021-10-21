@@ -38,6 +38,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(-80, 9))
                                         ->addPosition(new Position(-25, 82))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('North America')
                                 )
                             )
                             ->addPolygon(
@@ -47,6 +48,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(-37, -7))
                                         ->addPosition(new Position(-70, -55))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('South America')
                                 )
                             )
                             ->addPolygon(
@@ -57,6 +59,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(27, 70))
                                         ->addPosition(new Position(-24, 66))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('Europe')
                                 )
                             )
                             ->addPolygon(
@@ -68,6 +71,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(22, -35))
                                         ->addPosition(new Position(-17, 17))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('Africa')
                                 )
                             )
                             ->addPolygon(
@@ -79,6 +83,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(131, -2))
                                         ->addPosition(new Position(171, 67))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('Asia')
                                 )
                             )
                             ->addPolygon(
@@ -89,6 +94,7 @@ class WorldMapTest extends TestCase
                                         ->addPosition(new Position(148, -43))
                                         ->addPosition(new Position(114, -35))
                                         ->setFeatureClass('Continent')
+                                        ->setTitle('Australia')
                                 )
                             )
                     ),

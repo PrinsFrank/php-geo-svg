@@ -24,6 +24,10 @@ class ElementRenderer
             $elementContent .= str_repeat(self::INDENTING_CHAR, $currentDepth) . self::renderElement($childElement, $currentDepth);
         }
 
+        if ($element->getTextContent() !== null) {
+            $elementContent .= str_repeat(self::INDENTING_CHAR, $currentDepth) . $element->getTextContent()->getContent() . PHP_EOL;
+        }
+
         $attributeString = AttributeRenderer::renderAttributes($element->getAttributes());
         if ($elementContent === null && $element->canSelfClose()) {
             return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '/>' . PHP_EOL;

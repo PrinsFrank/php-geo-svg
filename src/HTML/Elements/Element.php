@@ -51,6 +51,11 @@ abstract class Element
         return $this;
     }
 
+    public function getTextContent(): ?TextContent
+    {
+        return $this->textContent;
+    }
+
     /**
      * @see https://html.spec.whatwg.org/#self-closing-start-tag-state
      *
