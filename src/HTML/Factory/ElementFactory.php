@@ -103,8 +103,12 @@ class ElementFactory
         return $element;
     }
 
-    public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): GroupElement
+    public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): GroupElement|PathElement
     {
+        if ($polygon->getInteriorRings() === []) {
+            return (new PathElement())->setAttribute('d', PathShapeRenderer::renderLineStringPath($polygon->getExteriorRing(), $coordinator));
+        }
+
         $element = new GroupElement();
         $element->addChildElement((new PathElement())->setAttribute('d', PathShapeRenderer::renderLineStringPath($polygon->getExteriorRing(), $coordinator)));
         foreach ($polygon->getInteriorRings() as $interiorRing) {
