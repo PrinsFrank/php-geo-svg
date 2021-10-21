@@ -14,6 +14,11 @@ use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
 class GeoSVG
 {
+    public const VENDOR_NAME  = 'prinsfrank';
+    public const PACKAGE_NAME = 'php-geo-svg';
+
+    public const PACKAGE_PATH = self::VENDOR_NAME . '/' . self::PACKAGE_NAME;
+
     public function __construct(private ?Projection $projection = null, private ?BoundingBox $boundingBox = null)
     {
     }
