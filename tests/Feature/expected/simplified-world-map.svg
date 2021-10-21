@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="360" height="180" viewbox="0 0 360 180">
+ <g>
+  <path d="M3 16 L100 81 L155 8" data-feature-class="Continent"/>
+  <path d="M100 81 L143 97 L110 145" data-feature-class="Continent"/>
+  <path d="M168 54 L210 53 L207 20 L156 24" data-feature-class="Continent"/>
+  <path d="M168 54 L210 53 L231 79 L202 125 L163 73" data-feature-class="Continent"/>
+  <path d="M207 20 L210 53 L231 79 L311 92 L351 23" data-feature-class="Continent"/>
+  <path d="M295 105 L333 105 L328 133 L294 125" data-feature-class="Continent"/>
+ </g>
+</svg>
