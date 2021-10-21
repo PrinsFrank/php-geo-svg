@@ -6,7 +6,8 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
 abstract class GeometryObject
 {
-    protected ?string $title = null;
+    protected ?string $title        = null;
+    protected ?string $featureClass = null;
 
     public function setTitle(?string $title): self
     {
@@ -18,5 +19,17 @@ abstract class GeometryObject
     public function getTitle(): ?string
     {
         return $this->title;
+    }
+
+    public function setFeatureClass(string $featureClass): self
+    {
+        $this->featureClass = $featureClass;
+
+        return $this;
+    }
+
+    public function getFeatureClass(): ?string
+    {
+        return $this->featureClass;
     }
 }

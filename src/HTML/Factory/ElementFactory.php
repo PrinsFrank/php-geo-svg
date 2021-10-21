@@ -60,6 +60,10 @@ class ElementFactory
             $element->addChildElement((new TitleElement())->setTextContent(new TextContent($geometryObject->getTitle())));
         }
 
+        if ($geometryObject->getFeatureClass() !== null) {
+            $element->setAttribute('data-feature-class', $geometryObject->getFeatureClass());
+        }
+
         return $element;
     }
 

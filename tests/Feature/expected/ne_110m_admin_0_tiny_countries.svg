@@ -1,39 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="360" height="180" viewbox="0 0 360 180">
- <circle cy="105.367957" cx="346.927066"/>
- <circle cy="139.338782" cx="249.22514"/>
- <circle cy="68.087007" cx="108.046096"/>
- <circle cy="111.220087" cx="20.210773"/>
- <circle cy="103.63737" cx="7.58627"/>
- <circle cy="111.158188" cx="4.764667"/>
- <circle cy="107.625005" cx="30.524504"/>
- <circle cy="114.36414" cx="51.6822"/>
- <circle cy="76.825328" cx="120.445694"/>
- <circle cy="79.563197" cx="118.744811"/>
- <circle cy="89.753193" cx="186.617199"/>
- <circle cy="97.939247" cx="165.637932"/>
- <circle cy="105.963222" cx="174.283704"/>
- <circle cy="54.117919" cx="194.438179"/>
- <circle cy="63.930557" cx="230.553638"/>
- <circle cy="85.813341" cx="253.502231"/>
- <circle cy="97.340706" cx="252.478729"/>
- <circle cy="88.640636" cx="283.81482"/>
- <circle cy="85.565331" cx="294.567455"/>
- <circle cy="82.492506" cx="314.579241"/>
- <circle cy="74.825363" cx="325.739263"/>
- <circle cy="76.540315" cx="324.770038"/>
- <circle cy="83.114058" cx="338.242015"/>
- <circle cy="82.68654" cx="348.728966"/>
- <circle cy="88.635742" cx="353.135158"/>
- <circle cy="90.523069" cx="346.937483"/>
- <circle cy="98.499724" cx="359.203974"/>
- <circle cy="110.302275" cx="237.58566"/>
- <circle cy="101.715556" cx="223.337943"/>
- <circle cy="27.808382" cx="173.057432"/>
- <circle cy="18.971751" cx="171.579383"/>
- <circle cy="43.142534" cx="123.684297"/>
- <circle cy="57.692778" cx="115.252022"/>
- <circle cy="51.51767" cx="151.576526"/>
- <circle cy="61.77101" cx="163.407228"/>
- <circle cy="57.254635" cx="163.040249"/>
- <circle cy="144.274479" cx="143.207857"/>
+ <circle cy="105.367957" cx="346.927066" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="139.338782" cx="249.22514" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="68.087007" cx="108.046096" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="111.220087" cx="20.210773" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="103.63737" cx="7.58627" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="111.158188" cx="4.764667" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="107.625005" cx="30.524504" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="114.36414" cx="51.6822" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="76.825328" cx="120.445694" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="79.563197" cx="118.744811" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="89.753193" cx="186.617199" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="97.939247" cx="165.637932" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="105.963222" cx="174.283704" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="54.117919" cx="194.438179" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="63.930557" cx="230.553638" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="85.813341" cx="253.502231" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="97.340706" cx="252.478729" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="88.640636" cx="283.81482" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="85.565331" cx="294.567455" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="82.492506" cx="314.579241" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="74.825363" cx="325.739263" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="76.540315" cx="324.770038" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="83.114058" cx="338.242015" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="82.68654" cx="348.728966" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="88.635742" cx="353.135158" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="90.523069" cx="346.937483" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="98.499724" cx="359.203974" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="110.302275" cx="237.58566" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="101.715556" cx="223.337943" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="27.808382" cx="173.057432" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="18.971751" cx="171.579383" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="43.142534" cx="123.684297" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="57.692778" cx="115.252022" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="51.51767" cx="151.576526" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="61.77101" cx="163.407228" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="57.254635" cx="163.040249" data-feature-class="Admin-0 Tiny Countries"/>
+ <circle cy="144.274479" cx="143.207857" data-feature-class="Admin-0 Tiny Countries"/>
 </svg>

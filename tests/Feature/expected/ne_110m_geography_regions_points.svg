@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="360" height="180" viewbox="0 0 360 180">
- <circle cy="46.912286" cx="100.955882"/>
- <circle cy="84.313104" cx="117.938182"/>
- <circle cy="115.568292" cx="125.417003"/>
+ <circle cy="46.912286" cx="100.955882" data-feature-class="waterfall"/>
+ <circle cy="84.313104" cx="117.938182" data-feature-class="waterfall"/>
+ <circle cy="115.568292" cx="125.417003" data-feature-class="waterfall"/>
 </svg>
