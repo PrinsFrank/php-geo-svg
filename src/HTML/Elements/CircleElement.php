@@ -2,7 +2,9 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
 
-class CircleElement extends Element
+use PrinsFrank\PhpGeoSVG\HTML\Elements\NameSpace\SvgNameSpace;
+
+class CircleElement extends Element implements SvgNameSpace
 {
     public function getTagName(): string
     {

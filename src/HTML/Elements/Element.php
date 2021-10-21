@@ -2,6 +2,7 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
 
+use PrinsFrank\PhpGeoSVG\HTML\Elements\Definition\ForeignElement;
 use PrinsFrank\PhpGeoSVG\HTML\Elements\Text\TextContent;
 
 abstract class Element
@@ -48,6 +49,29 @@ abstract class Element
         $this->textContent = $textContent;
 
         return $this;
+    }
+
+    /**
+     * @see https://html.spec.whatwg.org/#self-closing-start-tag-state
+     *
+     * Foreign elements must either have a start tag and an end tag, or a start tag that is marked as self-closing,
+     * in which case they must not have an end tag.
+     */
+    public function canSelfClose(): bool
+    {
+        if ($this->textContent !== null) {
+            return false;
+        }
+
+        if ($this->childElements !== []) {
+            return false;
+        }
+
+        if ($this instanceof ForeignElement === false) {
+            return false;
+        }
+
+        return true;
     }
 
     abstract public function getTagName(): string;

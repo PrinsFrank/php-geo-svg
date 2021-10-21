@@ -2,7 +2,9 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
 
-class SvgElement extends Element
+use PrinsFrank\PhpGeoSVG\HTML\Elements\NameSpace\SvgNameSpace;
+
+class SvgElement extends Element implements SvgNameSpace
 {
     public const XMLNS   = 'http://www.w3.org/2000/svg';
     public const VERSION = '1.1';

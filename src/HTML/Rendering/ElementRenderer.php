@@ -25,6 +25,10 @@ class ElementRenderer
         }
 
         $attributeString = AttributeRenderer::renderAttributes($element->getAttributes());
+        if ($elementContent === null && $element->canSelfClose()) {
+            return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '/>' . PHP_EOL;
+        }
+
         return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '>' . PHP_EOL .
             $elementContent .
         str_repeat(self::INDENTING_CHAR, $currentDepth - 1) . '</' . $element->getTagName() . '>' . PHP_EOL;

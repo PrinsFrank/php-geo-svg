@@ -2,7 +2,9 @@
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
 
-class PathElement extends Element
+use PrinsFrank\PhpGeoSVG\HTML\Elements\NameSpace\SvgNameSpace;
+
+class PathElement extends Element implements SvgNameSpace
 {
     public function getTagName(): string
     {
