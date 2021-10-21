@@ -73,46 +73,63 @@ class ElementFactory
             ->setAttribute('d', PathShapeRenderer::renderLineStringPath($lineString, $coordinator));
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public static function buildForMultiPoint(MultiPoint $multiPoint, Coordinator $coordinator): GroupElement
     {
         $element = new GroupElement();
         foreach ($multiPoint->getPositions() as $position) {
-            $element->addChildElement(self::buildForPosition($position, $coordinator));
+            $element->addChildElement(self::buildForGeometryObject($position, $coordinator));
         }
 
         return $element;
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public static function buildForMultiPolygon(MultiPolygon $multiPolygon, Coordinator $coordinator): GroupElement
     {
         $element = new GroupElement();
         foreach ($multiPolygon->getPolygons() as $polygon) {
-            $element->addChildElement(self::buildForPolygon($polygon, $coordinator));
+            $element->addChildElement(self::buildForGeometryObject($polygon, $coordinator));
         }
 
         return $element;
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public static function buildForMultiLineString(MultiLineString $multiLineString, Coordinator $coordinator): GroupElement
     {
         $element = new GroupElement();
         foreach ($multiLineString->getLineStrings() as $lineString) {
-            $element->addChildElement(self::buildForLineString($lineString, $coordinator));
+            $element->addChildElement(self::buildForGeometryObject($lineString, $coordinator));
         }
 
         return $element;
     }
 
-    public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): GroupElement|PathElement
+    /**
+     * @throws NotImplementedException
+     */
+    public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): Element
     {
-        if ($polygon->getInteriorRings() === []) {
-            return (new PathElement())->setAttribute('d', PathShapeRenderer::renderLineStringPath($polygon->getExteriorRing(), $coordinator));
+        if ($polygon->getInteriorRings() === [] && ($polygon->getFeatureClass() === null || $polygon->getExteriorRing()->getFeatureClass() === null)) {
+            $exteriorRing = $polygon->getExteriorRing();
+            if ($exteriorRing->getFeatureClass() === null & $polygon->getFeatureClass() !== null) {
+                $exteriorRing->setFeatureClass($polygon->getFeatureClass());
+            }
+
+            return self::buildForGeometryObject($exteriorRing, $coordinator);
         }
 
         $element = new GroupElement();
-        $element->addChildElement((new PathElement())->setAttribute('d', PathShapeRenderer::renderLineStringPath($polygon->getExteriorRing(), $coordinator)));
+        $element->addChildElement(self::buildForGeometryObject($polygon->getExteriorRing(), $coordinator));
         foreach ($polygon->getInteriorRings() as $interiorRing) {
-            $element->addChildElement((new PathElement())->setAttribute('d', PathShapeRenderer::renderLineStringPath($interiorRing, $coordinator)));
+            $element->addChildElement(self::buildForGeometryObject($interiorRing, $coordinator));
         }
 
         return $element;
