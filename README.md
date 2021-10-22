@@ -13,7 +13,7 @@ To start right away, run the following command in your composer project:
 
 ```composer require prinsfrank/php-geo-svg {--dev}```
 
-## The basics: creating an SVG
+## The basics; creating an SVG
 
 Let's say we want to create the following simple continent map:
 
@@ -261,3 +261,7 @@ Fluent:
     );
 ```
 </details>
+
+## Displaying only parts of the world; Using bounding boxes
+
+## Different globe-to-plane transformations; Projections
