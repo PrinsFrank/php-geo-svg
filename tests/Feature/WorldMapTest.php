@@ -19,13 +19,181 @@ class WorldMapTest extends TestCase
 {
     private const GEO_JSON_FOLDER = 'vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/';
 
+    public function testFromGeoJsonFile(): void
+    {
+        (new GeoSVG())
+            ->toFile(
+                GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geojson/continents.geojson'),
+                __DIR__ . '/actual/from-geojson-file.svg'
+            );
+
+        self::assertFileEquals(__DIR__ . '/expected/from-geojson-file.svg', __DIR__ . '/actual/from-geojson-file.svg');
+    }
+
+    /**
+     * @throws InvalidPositionException
+     * @throws PhpGeoSVGException
+     * @throws NotImplementedException
+     * @throws JsonException
+     */
+    public function testGeneratesFromGeoJsonFiles(): void
+    {
+        $geoJsonFileNames = scandir(dirname(__DIR__, 2) .  '/' . self::GEO_JSON_FOLDER);
+        $geoJsonFileNames = array_filter($geoJsonFileNames, static function ($geoJsonFileName){
+            return str_contains($geoJsonFileName, '110m');
+        });
+
+        static::assertCount(32, $geoJsonFileNames);
+        foreach ($geoJsonFileNames as $geoJsonFileName) {
+            $baseFileName = substr($geoJsonFileName, 0, -8);
+            (new GeoSVG())
+                ->toFile(
+                    GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . $geoJsonFileName),
+                    __DIR__ . '/actual/' . $baseFileName . '.svg'
+                );
+
+            self::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
+        }
+    }
+
+    public function testFromGeoJsonString(): void
+    {
+        (new GeoSVG())
+            ->toFile(
+                GeometryCollectionFactory::createFromGeoJsonString(
+                    '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[-177,74],[-80,9],[-25,82]]]}},{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[-80,9],[-37,-7],[-70,-55]]]}},{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[-12,36],[30,37],[27,70],[-24,66]]]}},{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[-12,36],[30,37],[51,11],[22,-35],[-17,17]]]}},{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[27,70],[30,37],[51,11],[131,-2],[171,67]]]}},{"type":"Feature","properties":{"featurecla":"Continent"},"geometry":{"type":"MultiLineString","coordinates":[[[115,-15],[153,-15],[148,-43],[114,-35]]]}}]}'
+                ),
+                __DIR__ . '/actual/from-geojson-string.svg'
+            );
+
+        self::assertFileEquals(__DIR__ . '/expected/from-geojson-string.svg', __DIR__ . '/actual/from-geojson-string.svg');
+    }
+
+    public function testFromGeoJSONArray(): void
+    {
+        (new GeoSVG())
+            ->toFile(
+                GeometryCollectionFactory::createFromGeoJSONArray(
+                    [
+                        'type' => 'FeatureCollection',
+                        'features' => [
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [-177, 74],
+                                            [-80, 9],
+                                            [-25, 82]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [-80, 9],
+                                            [-37, -7],
+                                            [-70, -55]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [-12, 36],
+                                            [30, 37],
+                                            [27, 70],
+                                            [-24, 66]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [-12, 36],
+                                            [30, 37],
+                                            [51, 11],
+                                            [22, -35],
+                                            [-17, 17]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [27, 70],
+                                            [30, 37],
+                                            [51, 11],
+                                            [131, -2],
+                                            [171, 67]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'type' => 'Feature',
+                                'properties' => [
+                                    'featurecla' => 'Continent'
+                                ],
+                                'geometry' => [
+                                    'type' => 'MultiLineString',
+                                    'coordinates' => [
+                                        [
+                                            [115, -15],
+                                            [153, -15],
+                                            [148, -43],
+                                            [114, -35]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                        ]
+                    ]
+                ),
+                __DIR__ . '/actual/from-geojson-array.svg'
+            );
+
+        self::assertFileEquals(__DIR__ . '/expected/from-geojson-array.svg', __DIR__ . '/actual/from-geojson-array.svg');
+    }
+
     /**
      * @throws PhpGeoSVGException
      * @throws InvalidPositionException
      */
-    public function testSimplifiedWorldMap(): void
+    public function testFromGeometryCollection(): void
     {
-        $baseFileName = 'simplified-world-map';
         (new GeoSVG())
             ->toFile(
                 (new GeometryCollection())
@@ -98,35 +266,9 @@ class WorldMapTest extends TestCase
                                 )
                             )
                     ),
-                __DIR__ . '/actual/' . $baseFileName . '.svg'
+                __DIR__ . '/actual/from-geometry-collection.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
-    }
-
-    /**
-     * @throws InvalidPositionException
-     * @throws PhpGeoSVGException
-     * @throws NotImplementedException
-     * @throws JsonException
-     */
-    public function testGeneratesFromGeoJson(): void
-    {
-        $geoJsonFileNames = scandir(dirname(__DIR__, 2) .  '/' .self::GEO_JSON_FOLDER);
-        $geoJsonFileNames = array_filter($geoJsonFileNames, static function ($geoJsonFileName){
-            return str_contains($geoJsonFileName, '110m');
-        });
-
-        static::assertCount(32, $geoJsonFileNames);
-        foreach ($geoJsonFileNames as $geoJsonFileName) {
-            $baseFileName = substr($geoJsonFileName, 0, -8);
-            (new GeoSVG())
-                ->toFile(
-                    GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . '/' . $geoJsonFileName),
-                    __DIR__ . '/actual/' . $baseFileName . '.svg'
-                );
-
-            self::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
-        }
+        self::assertFileEquals(__DIR__ . '/expected/from-geometry-collection.svg', __DIR__ . '/actual/from-geometry-collection.svg');
     }
 }
