@@ -9,7 +9,7 @@ Some highlights of this package:
 
 ## Installation
 
-To start away, run the following command in your composer project:
+To start right away, run the following command in your composer project:
 
 ```composer require prinsfrank/php-geo-svg {--dev}```
 
