@@ -1,4 +1,8 @@
+![Banner](docs/images/banner.png)
+
 # PHP Geo SVG
+
+Generate and display maps without external services or compromising on privacy.
 
 Some highlights of this package:
 - Supports creation of SVGs from GeoJSON (directly from file, as a JSON string or from an array) and manual GeometryCollection.
