@@ -15,7 +15,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
 
-class WorldMapTest extends TestCase
+class GeoSVGTest extends TestCase
 {
     private const GEO_JSON_FOLDER = 'vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/';
 
