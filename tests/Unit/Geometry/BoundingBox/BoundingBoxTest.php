@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Viewbox;
 
@@ -10,7 +11,7 @@ use PrinsFrank\PhpGeoSVG\Viewbox\ViewBox;
 /**
  * @coversDefaultClass \PrinsFrank\PhpGeoSVG\Viewbox\ViewBox
  */
-class ViewboxTest extends TestCase
+class BoundingBoxTest extends TestCase
 {
     /**
      * -------------------------------------------------------------
