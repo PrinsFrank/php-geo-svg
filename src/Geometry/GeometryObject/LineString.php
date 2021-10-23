@@ -8,7 +8,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 class LineString extends GeometryObject
 {
     /** @var Position[] */
-    protected array $positions;
+    protected array $positions = [];
 
     public function addPosition(Position $position): self
     {

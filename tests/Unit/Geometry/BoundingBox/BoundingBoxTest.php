@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Viewbox;
+namespace PrinsFrank\PhpGeoSVG\Tests\Unit\Geometry\BoundingBox;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Exception\ViewBoxOutOfBoundsException;

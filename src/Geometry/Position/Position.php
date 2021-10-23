@@ -42,6 +42,6 @@ class Position
 
     public function hasElevation(): bool
     {
-        return $this->elevation !== null;
+        return $this->elevation !== null && $this->elevation !== 0.0;
     }
 }
