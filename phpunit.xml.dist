@@ -4,6 +4,13 @@
          bootstrap="vendor/autoload.php"
          colors="true"
          verbose="true"
+         beStrictAboutCoversAnnotation="true"
+         forceCoversAnnotation="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         beStrictAboutResourceUsageDuringSmallTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertDeprecationsToExceptions="true"
 >
     <testsuites>
         <testsuite name="Unit">
