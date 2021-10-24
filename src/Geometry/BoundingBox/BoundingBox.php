@@ -50,11 +50,11 @@ class BoundingBox
 
     public function boundX(float $projectedX): float
     {
-        return $projectedX;
+        return $projectedX - ($this->southWestern->longitude - Position::MIN_LONGITUDE);
     }
 
     public function boundY(float $projectedY): float
     {
-        return $projectedY;
+        return $projectedY - (Position::MAX_LATITUDE - $this->northEastern->latitude);
     }
 }
