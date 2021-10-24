@@ -9,6 +9,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
 use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
+use PrinsFrank\PhpGeoSVG\Scale\Scale;
 
 /**
  * @coversDefaultClass \PrinsFrank\PhpGeoSVG\GeoSVG
@@ -77,5 +78,19 @@ class GeoSVGTest extends TestCase
         $boundingBox = new BoundingBox(new BoundingBoxPosition(1,2), new BoundingBoxPosition(3, 4));
 
         static::assertSame($boundingBox, (new GeoSVG())->setBoundingBox($boundingBox)->getBoundingBox());
+    }
+
+    /**
+     * @covers ::getScale
+     * @covers ::setScale
+     */
+    public function testScale(): void
+    {
+        $geoSVG = new GeoSVG();
+        static::assertEquals(new Scale(1), $geoSVG->getScale());
+
+        $scale = new Scale(10);
+        $geoSVG->setScale($scale);
+        static::assertSame($scale, $geoSVG->getScale());
     }
 }

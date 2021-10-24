@@ -9,6 +9,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
 use PrinsFrank\PhpGeoSVG\Projection\Projection;
+use PrinsFrank\PhpGeoSVG\Scale\Scale;
 
 /**
  * @coversDefaultClass \PrinsFrank\PhpGeoSVG\Coordinator\Coordinator
@@ -24,7 +25,7 @@ class CoordinatorTest extends TestCase
         $boundingBox = $this->createMock(BoundingBox::class);
         $boundingBox->expects(self::once())->method('getWidth')->with()->willReturn(42.0);
 
-        static::assertSame(42.0, (new Coordinator(new MercatorProjection(), $boundingBox))->getWidth());
+        static::assertSame(126.0, (new Coordinator(new MercatorProjection(), $boundingBox, new Scale(3)))->getWidth());
     }
 
     /**
@@ -36,7 +37,7 @@ class CoordinatorTest extends TestCase
         $boundingBox = $this->createMock(BoundingBox::class);
         $boundingBox->expects(self::once())->method('getHeight')->with()->willReturn(42.0);
 
-        static::assertSame(42.0, (new Coordinator(new MercatorProjection(), $boundingBox))->getHeight());
+        static::assertSame(252.0, (new Coordinator(new MercatorProjection(), $boundingBox, new Scale(3)))->getHeight());
     }
 
     /**
@@ -45,13 +46,13 @@ class CoordinatorTest extends TestCase
      */
     public function testGetX(): void
     {
+        $position = new Position(42.0, 84.0);
+
         $projection = $this->createMock(Projection::class);
-        $projection->expects(self::once())->method('getX')->with()->willReturn(42.0);
-
         $boundingBox = $this->createMock(BoundingBox::class);
-        $boundingBox->expects(self::once())->method('boundX')->with(42.0)->willReturn(0.42);
+        $boundingBox->expects(self::once())->method('boundX')->with($position, $projection)->willReturn(0.42);
 
-        static::assertSame(0.42, (new Coordinator($projection, $boundingBox))->getX(new Position(42.0, 84.0)));
+        static::assertSame(2.52, (new Coordinator($projection, $boundingBox, new Scale(3)))->getX($position));
     }
 
     /**
@@ -60,12 +61,12 @@ class CoordinatorTest extends TestCase
      */
     public function testGetY(): void
     {
+        $position = new Position(84.0, 42.0);
+
         $projection = $this->createMock(Projection::class);
-        $projection->expects(self::once())->method('getY')->with()->willReturn(42.0);
-
         $boundingBox = $this->createMock(BoundingBox::class);
-        $boundingBox->expects(self::once())->method('boundY')->with(42.0)->willReturn(0.42);
+        $boundingBox->expects(self::once())->method('boundY')->with($position, $projection)->willReturn(0.42);
 
-        static::assertSame(0.42, (new Coordinator($projection, $boundingBox))->getY(new Position(84.0, 42.0)));
+        static::assertSame(2.52, (new Coordinator($projection, $boundingBox, new Scale(3)))->getY($position));
     }
 }
