@@ -8,7 +8,7 @@ use PrinsFrank\PhpGeoSVG\HTML\Elements\Element;
 
 class ElementRenderer
 {
-    private const RECURSION_LIMIT = 100;
+    private const RECURSION_LIMIT = 10;
     private const INDENTING_CHAR  = ' ';
 
     /**

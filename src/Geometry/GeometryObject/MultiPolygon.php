@@ -6,7 +6,7 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 class MultiPolygon extends GeometryObject
 {
     /** @var Polygon[] */
-    protected array $polygons;
+    protected array $polygons = [];
 
     public function addPolygon(Polygon $polygon): self
     {

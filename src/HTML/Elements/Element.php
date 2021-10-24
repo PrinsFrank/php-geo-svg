@@ -65,7 +65,7 @@ abstract class Element
      */
     public function canSelfClose(): bool
     {
-        if ($this->textContent !== null) {
+        if ($this instanceof ForeignElement === false) {
             return false;
         }
 
@@ -73,7 +73,7 @@ abstract class Element
             return false;
         }
 
-        if ($this instanceof ForeignElement === false) {
+        if ($this->textContent !== null) {
             return false;
         }
 
