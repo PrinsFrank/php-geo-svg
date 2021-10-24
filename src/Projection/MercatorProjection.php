@@ -9,7 +9,7 @@ class MercatorProjection implements Projection
 {
     public function getX(Position $position): float
     {
-        return ($position->longitude + 180) * ($this->getMaxX() / 360);
+        return ($position->longitude + 180) * (Position::TOTAL_LONGITUDE * .5 / 360);
     }
 
     public function getY(Position $position): float
@@ -23,7 +23,7 @@ class MercatorProjection implements Projection
             $latitude = Position::MIN_LATITUDE + 0.001;
         }
 
-        return ($this->getMaxY() / 2) - ($this->getMaxX() * log(tan((M_PI / 4) + (($latitude*M_PI / 180) / 2))) / (2 * M_PI));
+        return (Position::TOTAL_LATITUDE / 2) - (Position::TOTAL_LONGITUDE * .5 * log(tan((M_PI / 4) + (($latitude*M_PI / 180) / 2))) / (2 * M_PI));
     }
 
     public function getMaxX(): float

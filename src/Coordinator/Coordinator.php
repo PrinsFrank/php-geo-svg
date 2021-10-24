@@ -15,12 +15,12 @@ class Coordinator
 
     public function getWidth(): float
     {
-        return $this->boundingBox->getWidth();
+        return $this->boundingBox->getWidth() / Position::TOTAL_LONGITUDE * $this->projection->getMaxX();
     }
 
     public function getHeight(): float
     {
-        return $this->boundingBox->getHeight();
+        return $this->boundingBox->getHeight() / Position::TOTAL_LATITUDE * $this->projection->getMaxY();
     }
 
     public function getX(Position $position): float

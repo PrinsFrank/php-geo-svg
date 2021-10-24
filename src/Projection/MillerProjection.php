@@ -11,4 +11,9 @@ class MillerProjection extends MercatorProjection
     {
         return parent::getY($position) / 5 * 4;
     }
+
+    public function getMaxY(): float
+    {
+        return parent::getMaxY() / 5 * 4;
+    }
 }
