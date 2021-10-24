@@ -80,8 +80,8 @@ class ElementFactory
     public static function buildForMultiPoint(MultiPoint $multiPoint, Coordinator $coordinator): GroupElement
     {
         $element = new GroupElement();
-        foreach ($multiPoint->getPositions() as $position) {
-            $element->addChildElement(self::buildForGeometryObject($position, $coordinator));
+        foreach ($multiPoint->getPoints() as $point) {
+            $element->addChildElement(self::buildForGeometryObject($point, $coordinator));
         }
 
         return $element;

@@ -3,25 +3,23 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
 
-use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
-
 class MultiPoint extends GeometryObject
 {
-    /** @var Position[] */
-    protected array $positions = [];
+    /** @var Point[] */
+    protected array $points = [];
 
-    public function addPosition(Position $position): self
+    public function addPoint(Point $point): self
     {
-        $this->positions[] = $position;
+        $this->points[] = $point;
 
         return $this;
     }
 
     /**
-     * @return Position[]
+     * @return Point[]
      */
-    public function getPositions(): array
+    public function getPoints(): array
     {
-        return $this->positions;
+        return $this->points;
     }
 }

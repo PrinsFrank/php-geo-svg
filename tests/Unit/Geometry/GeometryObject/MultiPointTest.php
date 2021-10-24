@@ -5,6 +5,7 @@ namespace Geometry\GeometryObject;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPoint;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Point;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
 /**
@@ -13,20 +14,20 @@ use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 class MultiPointTest extends TestCase
 {
     /**
-     * @covers ::getPositions
-     * @covers ::addPosition
+     * @covers ::getPoints
+     * @covers ::addPoint
      */
     public function testPositions(): void
     {
         $multiPoint = new MultiPoint();
-        static::assertSame([], $multiPoint->getPositions());
+        static::assertSame([], $multiPoint->getPoints());
 
-        $position1 = new Position(0, 0);
-        $multiPoint->addPosition($position1);
-        static::assertSame([$position1], $multiPoint->getPositions());
+        $point1 = new Point(new Position(0, 0));
+        $multiPoint->addPoint($point1);
+        static::assertSame([$point1], $multiPoint->getPoints());
 
-        $position2 = new Position(0, 0);
-        $multiPoint->addPosition($position2);
-        static::assertSame([$position1, $position2], $multiPoint->getPositions());
+        $point2 = new Point(new Position(0, 0));
+        $multiPoint->addPoint($point2);
+        static::assertSame([$point1, $point2], $multiPoint->getPoints());
     }
 }
