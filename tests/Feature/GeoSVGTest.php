@@ -52,7 +52,7 @@ class GeoSVGTest extends TestCase
             $baseFileName = substr($geoJsonFileName, 0, -8);
             (new GeoSVG())
                 ->toFile(
-                    GeometryCollectionFactory::createFromGeoJSONFilePath(self::GEO_JSON_FOLDER . $geoJsonFileName),
+                    GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) .  '/' . self::GEO_JSON_FOLDER . $geoJsonFileName),
                     __DIR__ . '/actual/' . $baseFileName . '.svg'
                 );
 

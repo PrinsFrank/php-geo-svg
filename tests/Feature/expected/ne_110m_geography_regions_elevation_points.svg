@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="360" height="180" viewbox="0 0 360 180">
- <circle cy="62.019519" cx="266.880596" data-feature-class="mountain"/>
- <circle cy="93.075715" cx="217.353252" data-feature-class="mountain"/>
- <circle cy="168.529362" cx="94.366271" data-feature-class="mountain"/>
- <circle cy="47.231315" cx="269.34012" data-feature-class="depression"/>
- <circle cy="58.48461" cx="215.47472" data-feature-class="depression"/>
- <circle cy="55.901609" cx="251.09783" data-feature-class="pass"/>
- <circle cy="54.117594" cx="256.513209" data-feature-class="mountain"/>
- <circle cy="53.583496" cx="267.413199" data-feature-class="mountain"/>
- <circle cy="58.933401" cx="261.312536" data-feature-class="mountain"/>
- <circle cy="45.742441" cx="229.009534" data-feature-class="depression"/>
- <circle cy="46.644829" cx="222.439198" data-feature-class="mountain"/>
- <circle cy="53.757745" cx="63.171774" data-feature-class="depression"/>
- <circle cy="26.930589" cx="28.992704" data-feature-class="mountain"/>
- <circle cy="53.417285" cx="61.707782" data-feature-class="mountain"/>
- <circle cy="118.448653" cx="317.284438" data-feature-class="depression"/>
- <circle cy="126.45588" cx="328.263192" data-feature-class="mountain"/>
- <circle cy="122.655679" cx="109.984199" data-feature-class="mountain"/>
- <circle cy="132.623997" cx="116.031222" data-feature-class="depression"/>
- <circle cy="84.548326" cx="113.624409" data-feature-class="mountain"/>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="360" viewbox="0 0 720 360">
+ <circle cy="124.039038" cx="533.761192" data-feature-class="mountain"/>
+ <circle cy="186.15143" cx="434.706504" data-feature-class="mountain"/>
+ <circle cy="337.058724" cx="188.732542" data-feature-class="mountain"/>
+ <circle cy="94.46263" cx="538.68024" data-feature-class="depression"/>
+ <circle cy="116.96922" cx="430.94944" data-feature-class="depression"/>
+ <circle cy="111.803218" cx="502.19566" data-feature-class="pass"/>
+ <circle cy="108.235188" cx="513.026418" data-feature-class="mountain"/>
+ <circle cy="107.166992" cx="534.826398" data-feature-class="mountain"/>
+ <circle cy="117.866802" cx="522.625072" data-feature-class="mountain"/>
+ <circle cy="91.484882" cx="458.019068" data-feature-class="depression"/>
+ <circle cy="93.289658" cx="444.878396" data-feature-class="mountain"/>
+ <circle cy="107.51549" cx="126.343548" data-feature-class="depression"/>
+ <circle cy="53.861178" cx="57.985408" data-feature-class="mountain"/>
+ <circle cy="106.83457" cx="123.415564" data-feature-class="mountain"/>
+ <circle cy="236.897306" cx="634.568876" data-feature-class="depression"/>
+ <circle cy="252.91176" cx="656.526384" data-feature-class="mountain"/>
+ <circle cy="245.311358" cx="219.968398" data-feature-class="mountain"/>
+ <circle cy="265.247994" cx="232.062444" data-feature-class="depression"/>
+ <circle cy="169.096652" cx="227.248818" data-feature-class="mountain"/>
 </svg>

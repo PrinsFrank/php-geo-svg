@@ -11,6 +11,7 @@ use PrinsFrank\PhpGeoSVG\GeoSVG;
 use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
 use PrinsFrank\PhpGeoSVG\Projection\MillerProjection;
+use PrinsFrank\PhpGeoSVG\Scale\Scale;
 
 /**
  * @coversNothing
@@ -20,6 +21,7 @@ class GeoSVGWithProjectionAndBoundingBoxTest extends TestCase
     public function testEquiRectangularProjection(): void
     {
         (new GeoSVG(new EquiRectangularProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
+            ->setScale(new Scale(10))
             ->toFile(
                 GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-equirectangular-bounded.svg'
@@ -31,6 +33,7 @@ class GeoSVGWithProjectionAndBoundingBoxTest extends TestCase
     public function testMercatorProjection(): void
     {
         (new GeoSVG(new MercatorProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
+            ->setScale(new Scale(10))
             ->toFile(
                 GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-mercator-bounded.svg'
@@ -42,6 +45,7 @@ class GeoSVGWithProjectionAndBoundingBoxTest extends TestCase
     public function testMillerProjection(): void
     {
         (new GeoSVG(new MillerProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
+            ->setScale(new Scale(10))
             ->toFile(
                 GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-miller-bounded.svg'

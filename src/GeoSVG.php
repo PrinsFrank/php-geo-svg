@@ -8,11 +8,11 @@ use PrinsFrank\PhpGeoSVG\Exception\PhpGeoSVGException;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
-use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\HTML\Factory\ElementFactory;
 use PrinsFrank\PhpGeoSVG\HTML\Rendering\ElementRenderer;
 use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\Projection;
+use PrinsFrank\PhpGeoSVG\Scale\Scale;
 
 class GeoSVG
 {
@@ -20,6 +20,8 @@ class GeoSVG
     public const PACKAGE_NAME = 'php-geo-svg';
 
     public const PACKAGE_PATH = self::VENDOR_NAME . '/' . self::PACKAGE_NAME;
+
+    private ?Scale $scale = null;
 
     public function __construct(private ?Projection $projection = null, private ?BoundingBox $boundingBox = null)
     {
@@ -60,13 +62,29 @@ class GeoSVG
         return $this->boundingBox;
     }
 
+    public function setScale(?Scale $scale): self
+    {
+        $this->scale = $scale;
+
+        return $this;
+    }
+
+    public function getScale(): Scale
+    {
+        if ($this->scale === null) {
+            $this->scale = new Scale(1);
+        }
+
+        return $this->scale;
+    }
+
     /**
      * @throws PhpGeoSVGException
      */
     public function render(GeometryCollection $geometryCollection): string
     {
         return ElementRenderer::renderElement(
-            ElementFactory::buildForGeometryCollection($geometryCollection, new Coordinator($this->getProjection(), $this->getBoundingBox()))
+            ElementFactory::buildForGeometryCollection($geometryCollection, new Coordinator($this->getProjection(), $this->getBoundingBox(), $this->getScale()))
         );
     }
 
