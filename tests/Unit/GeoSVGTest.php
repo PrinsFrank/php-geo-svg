@@ -5,7 +5,7 @@ namespace PrinsFrank\PhpGeoSVG\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
-use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
+use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
 use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
@@ -52,7 +52,7 @@ class GeoSVGTest extends TestCase
     public function testGetBoundingBoxReturnsDefaultOne(): void
     {
         static::assertEquals(
-            new BoundingBox(new Position(-180, -90), new Position(180, 90)),
+            new BoundingBox(new BoundingBoxPosition(-180, -90), new BoundingBoxPosition(180, 90)),
             (new GeoSVG())->getBoundingBox()
         );
     }
@@ -63,7 +63,7 @@ class GeoSVGTest extends TestCase
      */
     public function testGetBoundingBoxReturnsBoundingBoxProvidedUsingConstructor(): void
     {
-        $boundingBox = new BoundingBox(new Position(1,2), new Position(3, 4));
+        $boundingBox = new BoundingBox(new BoundingBoxPosition(1,2), new BoundingBoxPosition(3, 4));
 
         static::assertSame($boundingBox, (new GeoSVG(null, $boundingBox))->getBoundingBox());
     }
@@ -74,7 +74,7 @@ class GeoSVGTest extends TestCase
      */
     public function testGetBoundingBoxReturnsBoundingBoxProvidedUsingSetBoundingBoxMethod(): void
     {
-        $boundingBox = new BoundingBox(new Position(1,2), new Position(3, 4));
+        $boundingBox = new BoundingBox(new BoundingBoxPosition(1,2), new BoundingBoxPosition(3, 4));
 
         static::assertSame($boundingBox, (new GeoSVG())->setBoundingBox($boundingBox)->getBoundingBox());
     }

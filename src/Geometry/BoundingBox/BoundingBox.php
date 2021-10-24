@@ -11,12 +11,8 @@ class BoundingBox
     /**
      * @throws InvalidBoundingBoxException
      */
-    public function __construct(public Position $southWestern, public Position $northEastern)
+    public function __construct(public BoundingBoxPosition $southWestern, public BoundingBoxPosition $northEastern)
     {
-        if ($this->southWestern->hasElevation() !== $this->northEastern->hasElevation()) {
-            throw new InvalidBoundingBoxException('Either both or none of the Positions should have an elevation');
-        }
-
         if ($this->southWestern->longitude > Position::MAX_LONGITUDE) {
             throw new InvalidBoundingBoxException(
                 'The bounding box is unnecessarily rotated. Use a minLongitude of "' . (($this->southWestern->longitude + 180) % 360 - 180) . '" instead to achieve the same bound.'
@@ -29,20 +25,16 @@ class BoundingBox
             );
         }
 
-        if ($this->southWestern->latitude < Position::MIN_LATITUDE) {
-            throw new InvalidBoundingBoxException('The minimum Latitude is "' . Position::MIN_LATITUDE . '"');
-        }
-
-        if ($this->northEastern->latitude > Position::MAX_LATITUDE) {
-            throw new InvalidBoundingBoxException('The maximum Latitude is "' . Position::MIN_LATITUDE . '"');
-        }
-
         if ($this->northEastern->latitude < $this->southWestern->latitude) {
-            throw new InvalidBoundingBoxException('The latitude of the NorthEastern coordinate (' . $this->northEastern->latitude . ') is south of the SouthWestern coordinate (' . $this->southWestern->latitude . ')');
+            throw new InvalidBoundingBoxException(
+                'The latitude of the NorthEastern coordinate (' . $this->northEastern->latitude . ') is south of the SouthWestern coordinate (' . $this->southWestern->latitude . ')'
+            );
         }
 
         if ($this->northEastern->longitude < $this->southWestern->longitude) {
-            throw new InvalidBoundingBoxException('The longitude of the NorthEastern coordinate (' . $this->northEastern->longitude . ') is west of the SouthWestern coordinate (' . $this->southWestern->longitude . ')');
+            throw new InvalidBoundingBoxException(
+                'The longitude of the NorthEastern coordinate (' . $this->northEastern->longitude . ') is west of the SouthWestern coordinate (' . $this->southWestern->longitude . ')'
+            );
         }
     }
 

@@ -3,6 +3,6 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Exception;
 
-class ViewBoxOutOfBoundsException extends PhpGeoSVGException
+class InvalidBoundingBoxPositionException extends PhpGeoSVGException
 {
 }

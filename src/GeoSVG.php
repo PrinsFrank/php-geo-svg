@@ -6,6 +6,7 @@ namespace PrinsFrank\PhpGeoSVG;
 use PrinsFrank\PhpGeoSVG\Coordinator\Coordinator;
 use PrinsFrank\PhpGeoSVG\Exception\PhpGeoSVGException;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
+use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\HTML\Factory\ElementFactory;
@@ -53,7 +54,7 @@ class GeoSVG
     public function getBoundingBox(): BoundingBox
     {
         if ($this->boundingBox === null) {
-            $this->boundingBox = new BoundingBox(new Position(-180, -90), new Position(180, 90));
+            $this->boundingBox = new BoundingBox(new BoundingBoxPosition(-180, -90), new BoundingBoxPosition(180, 90));
         }
 
         return $this->boundingBox;

@@ -58,6 +58,21 @@ class PositionTest extends TestCase
 
     /**
      * @covers ::__construct
+     */
+    public function testValidBoundingBoxPositions(): void
+    {
+        new Position(0, 0);
+        new Position(180, 90);
+        new Position(-180, 90);
+        new Position(180, -90);
+        new Position(-180, -90);
+
+        // There are no assertions as we only check if there is no exception thrown here
+        $this->addToAssertionCount(1);
+    }
+
+    /**
+     * @covers ::__construct
      * @covers ::hasElevation
      */
     public function testHasElevation(): void
