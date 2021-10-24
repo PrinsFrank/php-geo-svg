@@ -16,11 +16,11 @@ class AttributeRenderer
         $attributesString = null;
         foreach($attributes as $attributeName => $attributeValue) {
             if (is_string($attributeName) === false) {
-                throw new InvalidArgumentException('Attribute names have to be of type string, "' . gettype($attributeName) . '" given.');
+                throw new InvalidArgumentException('Attribute names have to be of type string, "' . gettype($attributeName) . '"(' . $attributeName . ') given.');
             }
 
             if (is_string($attributeValue) === false) {
-                throw new InvalidArgumentException('Attribute values have to be of type string, "' . gettype($attributeValue) . '" given.');
+                throw new InvalidArgumentException('Attribute values have to be of type string, "' . gettype($attributeValue) . '"(' . $attributeValue . ') given.');
             }
 
             if ($attributesString !== null) {

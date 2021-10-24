@@ -18,7 +18,7 @@ class AttributeRendererTest extends TestCase
     public function testRenderAttributesThrowsExceptionWithNonStringAttributeName(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Attribute names have to be of type string, "integer" given.');
+        $this->expectExceptionMessage('Attribute names have to be of type string, "integer"(0) given.');
 
         AttributeRenderer::renderAttributes(['foo']);
     }
@@ -29,7 +29,7 @@ class AttributeRendererTest extends TestCase
     public function testRenderAttributesThrowsExceptionWithNonStringAttributeValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Attribute values have to be of type string, "integer" given.');
+        $this->expectExceptionMessage('Attribute values have to be of type string, "integer"(42) given.');
 
         AttributeRenderer::renderAttributes(['foo' => 42]);
     }

@@ -32,8 +32,8 @@ class ElementFactoryTest extends TestCase
 
         static::assertEquals(
             (new SvgElement())
-                ->setAttribute('width', '200.0')
-                ->setAttribute('height', '100.0')
+                ->setAttribute('width', '200')
+                ->setAttribute('height', '100')
                 ->setAttribute('viewbox', '0 0 200 100')
             ,
             ElementFactory::buildForGeometryCollection(new GeometryCollection(), $coordinator)
@@ -74,8 +74,8 @@ class ElementFactoryTest extends TestCase
 
         static::assertEquals(
             (new SvgElement())
-                ->setAttribute('width', '200.0')
-                ->setAttribute('height', '100.0')
+                ->setAttribute('width', '200')
+                ->setAttribute('height', '100')
                 ->setAttribute('viewbox', '0 0 200 100')
                 ->addChildElement(
                     (new PathElement())->setAttribute('d', 'M0 180 L0 0 L90 90')

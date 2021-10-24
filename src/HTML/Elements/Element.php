@@ -40,7 +40,7 @@ abstract class Element
 
     public function setAttribute(string $name, mixed $value): self
     {
-        $this->attributes[$name] = $value;
+        $this->attributes[$name] = (string) $value;
 
         return $this;
     }
