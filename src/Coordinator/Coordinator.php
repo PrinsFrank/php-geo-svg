@@ -25,15 +25,11 @@ class Coordinator
 
     public function getX(Position $position): float
     {
-        $projectedX = $this->projection->getX($position);
-
-        return $this->boundingBox->boundX($projectedX);
+        return $this->boundingBox->boundX($position, $this->projection);
     }
 
     public function getY(Position $position): float
     {
-        $projectedY = $this->projection->getY($position);
-
-        return $this->boundingBox->boundY($projectedY);
+        return $this->boundingBox->boundY($position, $this->projection);
     }
 }

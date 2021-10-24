@@ -5,6 +5,7 @@ namespace PrinsFrank\PhpGeoSVG\Geometry\BoundingBox;
 
 use PrinsFrank\PhpGeoSVG\Exception\InvalidBoundingBoxException;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
+use PrinsFrank\PhpGeoSVG\Projection\Projection;
 
 class BoundingBox
 {
@@ -48,13 +49,16 @@ class BoundingBox
         return - $this->southWestern->latitude + $this->northEastern->latitude;
     }
 
-    public function boundX(float $projectedX): float
+    public function boundX(Position $position, Projection $projection): float
     {
-        return $projectedX - ($this->southWestern->longitude - Position::MIN_LONGITUDE);
+        return $projection->getX($position)
+            - ($projection->getX(new Position($this->southWestern->longitude, 0))
+            - $projection->getX(new Position(Position::MIN_LONGITUDE, 0)));
     }
 
-    public function boundY(float $projectedY): float
+    public function boundY(Position $position, Projection $projection): float
     {
-        return $projectedY - (Position::MAX_LATITUDE - $this->northEastern->latitude);
+        return $projection->getY($position)
+            - ($projection->getY(new Position(0, $this->northEastern->latitude)));
     }
 }
