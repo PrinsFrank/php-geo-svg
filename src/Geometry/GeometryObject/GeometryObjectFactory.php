@@ -80,7 +80,7 @@ class GeometryObjectFactory
      */
     public static function createForPointCoordinates(array $coordinates): Point
     {
-        return new Point(new Position($coordinates[0], $coordinates[1], $coordinates[3] ?? null));
+        return new Point(new Position($coordinates[0], $coordinates[1], $coordinates[2] ?? null));
     }
 
     /**
