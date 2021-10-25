@@ -19,7 +19,7 @@ class GeoSVGWithProjectionTest extends TestCase
     {
         (new GeoSVG(new EquiRectangularProjection()))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
+                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-equirectangular.svg'
             );
 
@@ -30,7 +30,7 @@ class GeoSVGWithProjectionTest extends TestCase
     {
         (new GeoSVG(new MercatorProjection()))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
+                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-mercator.svg'
             );
 
@@ -41,7 +41,7 @@ class GeoSVGWithProjectionTest extends TestCase
     {
         (new GeoSVG(new MillerProjection()))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_10m_admin_0_countries.geojson'),
+                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
                 __DIR__ . '/actual/world-miller.svg'
             );
 
