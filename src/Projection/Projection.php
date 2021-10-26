@@ -14,4 +14,6 @@ interface Projection
     public function getMaxX(): float;
 
     public function getMaxY(): float;
+
+    public function getMaxLatitude(): float;
 }

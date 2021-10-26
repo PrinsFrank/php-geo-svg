@@ -26,4 +26,9 @@ class EquiRectangularProjection implements Projection
     {
         return Position::TOTAL_LATITUDE;
     }
+
+    public function getMaxLatitude(): float
+    {
+        return 90;
+    }
 }

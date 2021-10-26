@@ -59,6 +59,7 @@ class BoundingBox
     public function boundY(Position $position, Projection $projection): float
     {
         return $projection->getY($position)
-            - ($projection->getY(new Position(0, $this->northEastern->latitude)));
+            - ($projection->getY(new Position(0, $this->northEastern->latitude))
+            - $projection->getY(new Position(0, $projection->getMaxLatitude())));
     }
 }
