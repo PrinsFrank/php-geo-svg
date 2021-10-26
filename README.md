@@ -4,7 +4,11 @@
 
 > Generate and display maps without external services or compromising on privacy.
 
-## About this package
+## Why this package?
+
+When searching for high quality SVG's for [my blog](https://prinsfrank.nl/countries), I ran into the issue that all SVG's where either too low quality, heavily polluted with unnecessary elements by the tool they were generated with, or in the wrong projection.
+
+## Features
 
 - Supports creation of SVGs from GeoJSON (directly from file, as a JSON string or from an array) and manual GeometryCollection.
 - Output the svg directly to your user on request or output to a file.
@@ -19,7 +23,8 @@
 
 ## Table of Contents
 
-- [About this package](#about-this-package)
+- [Why this package?](#why-this-package)
+- [Features](#features)
 - [Table of Contents](#table-of-contents)
 - [Setup](#setup)
 - [The basics; creating an SVG](#the-basics-creating-an-svg)
