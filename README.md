@@ -6,7 +6,7 @@
 
 ## Why this package?
 
-When searching for high quality SVG's for [my blog](https://prinsfrank.nl/countries), I ran into the issue that all SVG's where either too low quality, heavily polluted with unnecessary elements by the tool they were generated with, or in the wrong projection.
+When searching for high quality SVG's for [my blog](https://prinsfrank.nl/countries), I ran into the issue that all SVG's where either too low quality, heavily polluted with unnecessary elements by the tool they were generated with, or in the wrong projection. This package provides the flexibility to generate maps manually or from geojson files, which are more readily available.
 
 ## Features
 
