@@ -18,9 +18,9 @@ class PositionTest extends TestCase
     public function testThrowsExceptionWhenLongitudeTooHigh(): void
     {
         $this->expectException(InvalidPositionException::class);
-        $this->expectExceptionMessage('The longitude should be between -180 and 180, "180.01" provided.');
+        $this->expectExceptionMessage('The longitude should be between -180 and 180, "181.01" provided.');
 
-        new Position(180.01, 0);
+        new Position(181.01, 0);
     }
 
     /**
@@ -29,9 +29,9 @@ class PositionTest extends TestCase
     public function testThrowsExceptionWhenLongitudeTooLow(): void
     {
         $this->expectException(InvalidPositionException::class);
-        $this->expectExceptionMessage('The longitude should be between -180 and 180, "-180.01" provided.');
+        $this->expectExceptionMessage('The longitude should be between -180 and 180, "-181.01" provided.');
 
-        new Position(-180.01, 0);
+        new Position(-181.01, 0);
     }
 
     /**
@@ -40,9 +40,9 @@ class PositionTest extends TestCase
     public function testThrowsExceptionWhenLatitudeTooHigh(): void
     {
         $this->expectException(InvalidPositionException::class);
-        $this->expectExceptionMessage('The latitude should be between -90 and 90, "90.01" provided.');
+        $this->expectExceptionMessage('The latitude should be between -90 and 90, "91.01" provided.');
 
-        new Position(0, 90.01);
+        new Position(0, 91.01);
     }
 
     /**
@@ -51,9 +51,9 @@ class PositionTest extends TestCase
     public function testThrowsExceptionWhenLatitudeTooLow(): void
     {
         $this->expectException(InvalidPositionException::class);
-        $this->expectExceptionMessage('The latitude should be between -90 and 90, "-90.01" provided.');
+        $this->expectExceptionMessage('The latitude should be between -90 and 90, "-91.01" provided.');
 
-        new Position(0, -90.01);
+        new Position(0, -91.01);
     }
 
     /**

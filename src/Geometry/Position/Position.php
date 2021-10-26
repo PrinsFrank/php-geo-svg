@@ -7,13 +7,15 @@ use PrinsFrank\PhpGeoSVG\Exception\InvalidPositionException;
 
 class Position
 {
-    public const MIN_LONGITUDE   = -180;
-    public const MAX_LONGITUDE   = 180;
-    public const TOTAL_LONGITUDE = self::MAX_LONGITUDE - self::MIN_LONGITUDE;
+    public const MIN_LONGITUDE       = -180;
+    public const MAX_LONGITUDE       = 180;
+    public const LONGITUDE_THRESHOLD = 1;
+    public const TOTAL_LONGITUDE     = self::MAX_LONGITUDE - self::MIN_LONGITUDE;
 
-    public const MIN_LATITUDE   = -90;
-    public const MAX_LATITUDE   = 90;
-    public const TOTAL_LATITUDE = self::MAX_LATITUDE - self::MIN_LATITUDE;
+    public const MIN_LATITUDE       = -90;
+    public const MAX_LATITUDE       = 90;
+    public const LATITUDE_THRESHOLD = 1;
+    public const TOTAL_LATITUDE     = self::MAX_LATITUDE - self::MIN_LATITUDE;
 
     /**
      * The coordinate reference system for all GeoJSON coordinates is a
@@ -31,11 +33,11 @@ class Position
      */
     public function __construct(public float $longitude, public float $latitude, public ?float $elevation = null)
     {
-        if ($this->longitude > static::MAX_LONGITUDE || $this->longitude < static::MIN_LONGITUDE) {
+        if ($this->longitude > (static::MAX_LONGITUDE + static::LONGITUDE_THRESHOLD) || $this->longitude < (static::MIN_LONGITUDE - static::LONGITUDE_THRESHOLD)) {
             throw new InvalidPositionException('The longitude should be between ' . static::MIN_LONGITUDE . ' and ' . static::MAX_LONGITUDE . ', "' . $this->longitude . '" provided.');
         }
 
-        if ($this->latitude > static::MAX_LATITUDE || $this->latitude < static::MIN_LATITUDE) {
+        if ($this->latitude > (static::MAX_LATITUDE + static::LATITUDE_THRESHOLD) || $this->latitude < (static::MIN_LATITUDE - static::LATITUDE_THRESHOLD)) {
             throw new InvalidPositionException('The latitude should be between ' . static::MIN_LATITUDE . ' and ' . static::MAX_LATITUDE . ', "' . $this->latitude . '" provided.');
         }
     }
