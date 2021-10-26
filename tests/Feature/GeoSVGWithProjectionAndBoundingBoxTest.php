@@ -21,36 +21,36 @@ class GeoSVGWithProjectionAndBoundingBoxTest extends TestCase
     public function testEquiRectangularProjection(): void
     {
         (new GeoSVG(new EquiRectangularProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
-            ->setScale(new Scale(10))
+            ->setScale(new Scale(20))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
-                __DIR__ . '/actual/world-equirectangular-bounded.svg'
+                GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geojson/netherlands.geojson'),
+                __DIR__ . '/actual/netherlands-equirectangular.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-equirectangular-bounded.svg', __DIR__ . '/actual/world-equirectangular-bounded.svg');
+        self::assertFileEquals(__DIR__ . '/expected/netherlands-equirectangular.svg', __DIR__ . '/actual/netherlands-equirectangular.svg');
     }
 
     public function testMercatorProjection(): void
     {
         (new GeoSVG(new MercatorProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
-            ->setScale(new Scale(10))
+            ->setScale(new Scale(20))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
-                __DIR__ . '/actual/world-mercator-bounded.svg'
+                GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geojson/netherlands.geojson'),
+                __DIR__ . '/actual/netherlands-mercator.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-mercator-bounded.svg', __DIR__ . '/actual/world-mercator-bounded.svg');
+        self::assertFileEquals(__DIR__ . '/expected/netherlands-mercator.svg', __DIR__ . '/actual/netherlands-mercator.svg');
     }
 
     public function testMillerProjection(): void
     {
         (new GeoSVG(new MillerProjection(), new BoundingBox(new BoundingBoxPosition( 3.5, 50.8), new BoundingBoxPosition( 7.2, 53.5))))
-            ->setScale(new Scale(10))
+            ->setScale(new Scale(20))
             ->toFile(
-                GeometryCollectionFactory::createFromGeoJSONFilePath(dirname(__DIR__, 2) . '/vendor/prinsfrank/natural-earth-vector-geojson-only/geojson/ne_110m_admin_0_countries.geojson'),
-                __DIR__ . '/actual/world-miller-bounded.svg'
+                GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geojson/netherlands.geojson'),
+                __DIR__ . '/actual/netherlands-miller.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-miller-bounded.svg', __DIR__ . '/actual/world-miller-bounded.svg');
+        self::assertFileEquals(__DIR__ . '/expected/netherlands-miller.svg', __DIR__ . '/actual/netherlands-miller.svg');
     }
 }
