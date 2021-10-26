@@ -2,9 +2,10 @@
 
 # PHP Geo SVG
 
-Generate and display maps without external services or compromising on privacy.
+> Generate and display maps without external services or compromising on privacy.
 
-Some highlights of this package:
+## About this package
+
 - Supports creation of SVGs from GeoJSON (directly from file, as a JSON string or from an array) and manual GeometryCollection.
 - Output the svg directly to your user on request or output to a file.
 - Render an entire world map or only part of it by using a bounding box.
@@ -15,6 +16,19 @@ Some highlights of this package:
 |:----:|
 |Countries - Equirectangular projection <div>![](docs/images/world-equirectangular.svg)</div>|
 |Netherlands - Mercator projection <div>![](docs/images/netherlands-mercator.svg)</div>|
+
+## Table of Contents
+
+- [About this package](#about-this-package)
+- [Table of Contents](#table-of-contents)
+- [Setup](#setup)
+- [The basics; creating an SVG](#the-basics-creating-an-svg)
+  - [From a GeoJSON file](#from-a-geojson-file)
+  - [From a GeoJSON string](#from-a-geojson-string)
+  - [From a GeoJSON array](#from-a-geojson-array)
+  - [From building your own GeometryCollection](#from-building-your-own-geometrycollection)
+- [Different globe-to-plane transformations; Projections](#different-globe-to-plane-transformations-projections)
+- [Displaying only parts of the world; Using bounding boxes](#displaying-only-parts-of-the-world-using-bounding-boxes)
 
 ## Setup
 
