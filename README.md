@@ -2,7 +2,7 @@
 
 # PHP Geo SVG
 
-> Generate and display maps without external services or compromising on privacy.
+**Generate and display maps without external services or compromising on privacy.**
 
 ## Why this package?
 
