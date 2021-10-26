@@ -11,11 +11,20 @@ Some highlights of this package:
 - Easy support for projections. Currently supported: EquiRectangular, Mercator and Miller. Please open a PR to add any extra ones.
 - When you create or edit a GeometryCollection, a Fluent Interface is provided to allow for method chaining.
 
-## Installation
+|Showcase|
+|:----:|
+|Countries - Equirectangular projection <div>![](docs/images/world-equirectangular.svg)</div>|
+|Netherlands - Mercator projection <div>![](docs/images/netherlands-mercator.svg)</div>|
 
-To start right away, run the following command in your composer project:
+## Setup
 
-```composer require prinsfrank/php-geo-svg {--dev}```
+To start right away, run the following command in your composer project;
+
+```composer require prinsfrank/php-geo-svg```
+
+Or for development only;
+
+```composer require prinsfrank/php-geo-svg --dev```
 
 ## The basics; creating an SVG
 
@@ -266,6 +275,46 @@ Fluent:
 ```
 </details>
 
+## Different globe-to-plane transformations; Projections
+
+If you prefer a different projection other than the default EquiRectangular, you can! Currently, the following projections are supported, but please feel free to add any and open a PR;
+- Equirectangular
+- Mercator
+- Miller
+
+To specify the projection you want to use, you can do so either using the constructor;
+
+```
+$geoSVG = new GeoSVG(new MercatorProjection);
+```
+
+Or using the 'setProjection' method;
+
+```
+$geoSVG = new GeoSVG();
+$geoSVG->setProjection(new MercatorProjection);
+```
+
 ## Displaying only parts of the world; Using bounding boxes
 
-## Different globe-to-plane transformations; Projections
+If you want to use a bounding box, you have to know both the most southWestern and northEastern coordinates you want to show, and create 'BoundingBoxPositions' for both of them. Pass those along to a bounding box object and you have yourself a bounding box;
+
+```
+$northEastern = new BoundingBoxPosition(7.2, 53.5);
+$southWestern = new BoundingBoxPosition(3.5, 50.8);
+
+$boundingBox  = new BoundingBox($southWestern, $northEastern);
+```
+
+To actually use it, either pass the bounding box in the constructor after the projection;
+
+```
+$geoSVG = new GeoSVG($projection, $boundingBox);
+```
+
+Or set the bounding box using the 'setBoundingBox' method;
+
+```
+$geoSVG = new GeoSVG();
+$geoSVG->setBoundingBox($boundingBox);
+```
