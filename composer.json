@@ -3,6 +3,9 @@
     "description": "Generate Geo SVGs",
     "type": "library",
     "license": "MIT",
+    "require": {
+        "php": "^8.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "prinsfrank/natural-earth-vector-geojson-only": "^4.1.0"
