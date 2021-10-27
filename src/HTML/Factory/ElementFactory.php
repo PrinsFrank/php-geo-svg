@@ -120,7 +120,7 @@ class ElementFactory
     {
         if ($polygon->getInteriorRings() === [] && ($polygon->getFeatureClass() === null || $polygon->getExteriorRing()->getFeatureClass() === null)) {
             $exteriorRing = $polygon->getExteriorRing();
-            if ($exteriorRing->getFeatureClass() === null & $polygon->getFeatureClass() !== null) {
+            if ($exteriorRing->getFeatureClass() === null && $polygon->getFeatureClass() !== null) {
                 $exteriorRing->setFeatureClass($polygon->getFeatureClass());
             }
 
