@@ -47,4 +47,12 @@ class EquiRectangularProjectionTest extends TestCase
     {
         static::assertSame(180.0, (new EquiRectangularProjection())->getMaxY());
     }
+
+    /**
+     * @covers ::getMaxLatitude
+     */
+    public function testGetMaxLatitude(): void
+    {
+        static::assertSame(90.0, (new EquiRectangularProjection())->getMaxLatitude());
+    }
 }
