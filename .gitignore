@@ -3,3 +3,5 @@ composer.lock
 
 .phpunit.result.cache
 /tests/Feature/actual/*
+
+.php-cs-fixer.cache

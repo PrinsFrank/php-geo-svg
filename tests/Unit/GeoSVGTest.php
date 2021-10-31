@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Unit;
@@ -64,7 +65,7 @@ class GeoSVGTest extends TestCase
      */
     public function testGetBoundingBoxReturnsBoundingBoxProvidedUsingConstructor(): void
     {
-        $boundingBox = new BoundingBox(new BoundingBoxPosition(1,2), new BoundingBoxPosition(3, 4));
+        $boundingBox = new BoundingBox(new BoundingBoxPosition(1, 2), new BoundingBoxPosition(3, 4));
 
         static::assertSame($boundingBox, (new GeoSVG(null, $boundingBox))->getBoundingBox());
     }
@@ -75,7 +76,7 @@ class GeoSVGTest extends TestCase
      */
     public function testGetBoundingBoxReturnsBoundingBoxProvidedUsingSetBoundingBoxMethod(): void
     {
-        $boundingBox = new BoundingBox(new BoundingBoxPosition(1,2), new BoundingBoxPosition(3, 4));
+        $boundingBox = new BoundingBox(new BoundingBoxPosition(1, 2), new BoundingBoxPosition(3, 4));
 
         static::assertSame($boundingBox, (new GeoSVG())->setBoundingBox($boundingBox)->getBoundingBox());
     }

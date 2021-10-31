@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Rendering;
@@ -14,16 +15,16 @@ class AttributeRenderer
     public static function renderAttributes(array $attributes): ?string
     {
         $attributesString = null;
-        foreach($attributes as $attributeName => $attributeValue) {
-            if (is_string($attributeName) === false) {
+        foreach ($attributes as $attributeName => $attributeValue) {
+            if (false === is_string($attributeName)) {
                 throw new InvalidArgumentException('Attribute names have to be of type string, "' . gettype($attributeName) . '"(' . $attributeName . ') given.');
             }
 
-            if (is_string($attributeValue) === false) {
+            if (false === is_string($attributeValue)) {
                 throw new InvalidArgumentException('Attribute values have to be of type string, "' . gettype($attributeValue) . '"(' . $attributeValue . ') given.');
             }
 
-            if ($attributesString !== null) {
+            if (null !== $attributesString) {
                 $attributesString .= ' ';
             }
 

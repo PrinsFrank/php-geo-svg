@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HTML\Factory;
@@ -27,15 +28,14 @@ class ElementFactoryTest extends TestCase
     public function testBuildForGeometryCollectionWithoutGeometryObjects(): void
     {
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::exactly(2))->method('getWidth')->with()->willReturn(200.0);
-        $coordinator->expects(self::exactly(2))->method('getHeight')->with()->willReturn(100.0);
+        $coordinator->expects(static::exactly(2))->method('getWidth')->with()->willReturn(200.0);
+        $coordinator->expects(static::exactly(2))->method('getHeight')->with()->willReturn(100.0);
 
         static::assertEquals(
             (new SvgElement())
                 ->setAttribute('width', '200')
                 ->setAttribute('height', '100')
-                ->setAttribute('viewbox', '0 0 200 100')
-            ,
+                ->setAttribute('viewbox', '0 0 200 100'),
             ElementFactory::buildForGeometryCollection(new GeometryCollection(), $coordinator)
         );
     }
@@ -46,8 +46,8 @@ class ElementFactoryTest extends TestCase
     public function testBuildForGeometryCollection(): void
     {
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::exactly(2))->method('getWidth')->with()->willReturn(200.0);
-        $coordinator->expects(self::exactly(2))->method('getHeight')->with()->willReturn(100.0);
+        $coordinator->expects(static::exactly(2))->method('getWidth')->with()->willReturn(200.0);
+        $coordinator->expects(static::exactly(2))->method('getHeight')->with()->willReturn(100.0);
 
         $geometryCollection = new GeometryCollection();
         $geometryCollection->addGeometryObject(
@@ -63,11 +63,11 @@ class ElementFactoryTest extends TestCase
                 ->addPosition($position6 = new Position(0, 0))
         );
 
-        $coordinator->expects(self::exactly(6))
+        $coordinator->expects(static::exactly(6))
             ->method('getX')
             ->withConsecutive([$position1], [$position2], [$position3], [$position4], [$position5], [$position6])
             ->willReturnOnConsecutiveCalls(0, 0, 90, 180, 180, 90);
-        $coordinator->expects(self::exactly(6))
+        $coordinator->expects(static::exactly(6))
             ->method('getY')
             ->withConsecutive([$position1], [$position2], [$position3], [$position4], [$position5], [$position6])
             ->willReturnOnConsecutiveCalls(180, 0, 90, 180, 0, 90);
@@ -82,8 +82,7 @@ class ElementFactoryTest extends TestCase
                 )
                 ->addChildElement(
                     (new PathElement())->setAttribute('d', 'M180 180 L180 0 L90 90')
-                )
-            ,
+                ),
             ElementFactory::buildForGeometryCollection($geometryCollection, $coordinator)
         );
     }
@@ -102,11 +101,11 @@ class ElementFactoryTest extends TestCase
         $lineString->addPosition($position3);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::exactly(3))
+        $coordinator->expects(static::exactly(3))
             ->method('getX')
             ->withConsecutive([$position1], [$position2], [$position3])
             ->willReturnOnConsecutiveCalls(0, 0, 100);
-        $coordinator->expects(self::exactly(3))
+        $coordinator->expects(static::exactly(3))
             ->method('getY')
             ->withConsecutive([$position1], [$position2], [$position3])
             ->willReturnOnConsecutiveCalls(0, 100, 50);
@@ -140,14 +139,14 @@ class ElementFactoryTest extends TestCase
         $multiPoint->addPoint($point2);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::exactly(2))
+        $coordinator->expects(static::exactly(2))
             ->method('getX')
             ->withConsecutive([$position1], [$position2])
-            ->willReturnOnConsecutiveCalls(-90.0, 90,0);
-        $coordinator->expects(self::exactly(2))
+            ->willReturnOnConsecutiveCalls(-90.0, 90, 0);
+        $coordinator->expects(static::exactly(2))
             ->method('getY')
             ->withConsecutive([$position1], [$position2])
-            ->willReturnOnConsecutiveCalls(-90.0, 90,0);
+            ->willReturnOnConsecutiveCalls(-90.0, 90, 0);
 
         static::assertEquals(
             (new GroupElement())
@@ -165,8 +164,8 @@ class ElementFactoryTest extends TestCase
         $position = new Position(100, 50);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::once())->method('getX')->with($position)->willReturn(13.0);
-        $coordinator->expects(self::once())->method('getY')->with($position)->willReturn(42.0);
+        $coordinator->expects(static::once())->method('getX')->with($position)->willReturn(13.0);
+        $coordinator->expects(static::once())->method('getY')->with($position)->willReturn(42.0);
 
         static::assertEquals(
             (new CircleElement())->setAttribute('cy', 42)->setAttribute('cx', 13),
@@ -182,8 +181,8 @@ class ElementFactoryTest extends TestCase
         $position = new Position(100, 50);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::once())->method('getX')->with($position)->willReturn(13.0);
-        $coordinator->expects(self::once())->method('getY')->with($position)->willReturn(42.0);
+        $coordinator->expects(static::once())->method('getX')->with($position)->willReturn(13.0);
+        $coordinator->expects(static::once())->method('getY')->with($position)->willReturn(42.0);
 
         static::assertEquals(
             (new CircleElement())->setAttribute('cy', 42)->setAttribute('cx', 13),

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Feature;
@@ -23,7 +24,7 @@ class GeoSVGWithProjectionTest extends TestCase
                 __DIR__ . '/actual/world-equirectangular.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-equirectangular.svg', __DIR__ . '/actual/world-equirectangular.svg');
+        static::assertFileEquals(__DIR__ . '/expected/world-equirectangular.svg', __DIR__ . '/actual/world-equirectangular.svg');
     }
 
     public function testMercatorProjection(): void
@@ -34,7 +35,7 @@ class GeoSVGWithProjectionTest extends TestCase
                 __DIR__ . '/actual/world-mercator.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-mercator.svg', __DIR__ . '/actual/world-mercator.svg');
+        static::assertFileEquals(__DIR__ . '/expected/world-mercator.svg', __DIR__ . '/actual/world-mercator.svg');
     }
 
     public function testMillerProjection(): void
@@ -45,6 +46,6 @@ class GeoSVGWithProjectionTest extends TestCase
                 __DIR__ . '/actual/world-miller.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/world-miller.svg', __DIR__ . '/actual/world-miller.svg');
+        static::assertFileEquals(__DIR__ . '/expected/world-miller.svg', __DIR__ . '/actual/world-miller.svg');
     }
 }

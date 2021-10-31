@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Feature;
@@ -31,7 +32,7 @@ class GeoSVGTest extends TestCase
                 __DIR__ . '/actual/from-geojson-file.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/from-geojson-file.svg', __DIR__ . '/actual/from-geojson-file.svg');
+        static::assertFileEquals(__DIR__ . '/expected/from-geojson-file.svg', __DIR__ . '/actual/from-geojson-file.svg');
     }
 
     /**
@@ -43,7 +44,7 @@ class GeoSVGTest extends TestCase
     public function testGeneratesFromGeoJsonFiles(): void
     {
         $geoJsonFileNames = scandir(dirname(__DIR__, 2) .  '/' . self::GEO_JSON_FOLDER);
-        $geoJsonFileNames = array_filter($geoJsonFileNames, static function ($geoJsonFileName){
+        $geoJsonFileNames = array_filter($geoJsonFileNames, static function ($geoJsonFileName) {
             return str_contains($geoJsonFileName, '110m');
         });
 
@@ -56,7 +57,7 @@ class GeoSVGTest extends TestCase
                     __DIR__ . '/actual/' . $baseFileName . '.svg'
                 );
 
-            self::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
+            static::assertFileEquals(__DIR__ . '/expected/' . $baseFileName . '.svg', __DIR__ . '/actual/' . $baseFileName . '.svg');
         }
     }
 
@@ -70,7 +71,7 @@ class GeoSVGTest extends TestCase
                 __DIR__ . '/actual/from-geojson-string.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/from-geojson-string.svg', __DIR__ . '/actual/from-geojson-string.svg');
+        static::assertFileEquals(__DIR__ . '/expected/from-geojson-string.svg', __DIR__ . '/actual/from-geojson-string.svg');
     }
 
     public function testFromGeoJSONArray(): void
@@ -189,7 +190,7 @@ class GeoSVGTest extends TestCase
                 __DIR__ . '/actual/from-geojson-array.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/from-geojson-array.svg', __DIR__ . '/actual/from-geojson-array.svg');
+        static::assertFileEquals(__DIR__ . '/expected/from-geojson-array.svg', __DIR__ . '/actual/from-geojson-array.svg');
     }
 
     /**
@@ -273,6 +274,6 @@ class GeoSVGTest extends TestCase
                 __DIR__ . '/actual/from-geometry-collection.svg'
             );
 
-        self::assertFileEquals(__DIR__ . '/expected/from-geometry-collection.svg', __DIR__ . '/actual/from-geometry-collection.svg');
+        static::assertFileEquals(__DIR__ . '/expected/from-geometry-collection.svg', __DIR__ . '/actual/from-geometry-collection.svg');
     }
 }

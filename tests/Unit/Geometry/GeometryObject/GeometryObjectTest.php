@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Geometry\GeometryObject;
@@ -17,7 +18,7 @@ class GeometryObjectTest extends TestCase
     {
         parent::setUp();
 
-        $this->geometryObject = new class extends GeometryObject {};
+        $this->geometryObject = new class () extends GeometryObject {};
     }
 
     /**

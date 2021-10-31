@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Factory;
@@ -57,11 +58,11 @@ class ElementFactory
             default => throw new NotImplementedException('GeometryObject with class "' . get_class($geometryObject) . '" can\'t be built yet.')
         };
 
-        if ($geometryObject->getTitle() !== null) {
+        if (null !== $geometryObject->getTitle()) {
             $element->addChildElement((new TitleElement())->setTextContent(new TextContent($geometryObject->getTitle())));
         }
 
-        if ($geometryObject->getFeatureClass() !== null) {
+        if (null !== $geometryObject->getFeatureClass()) {
             $element->setAttribute('data-feature-class', $geometryObject->getFeatureClass());
         }
 
@@ -118,9 +119,9 @@ class ElementFactory
      */
     public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): Element
     {
-        if ($polygon->getInteriorRings() === [] && ($polygon->getFeatureClass() === null || $polygon->getExteriorRing()->getFeatureClass() === null)) {
+        if ([] === $polygon->getInteriorRings() && (null === $polygon->getFeatureClass() || null === $polygon->getExteriorRing()->getFeatureClass())) {
             $exteriorRing = $polygon->getExteriorRing();
-            if ($exteriorRing->getFeatureClass() === null && $polygon->getFeatureClass() !== null) {
+            if (null === $exteriorRing->getFeatureClass() && null !== $polygon->getFeatureClass()) {
                 $exteriorRing->setFeatureClass($polygon->getFeatureClass());
             }
 

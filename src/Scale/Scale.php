@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Scale;
@@ -9,7 +10,7 @@ class Scale
 
     public function __construct(private float $factorX, ?float $factorY = null)
     {
-        if ($factorY === null) {
+        if (null === $factorY) {
             $factorY = $factorX;
         }
 

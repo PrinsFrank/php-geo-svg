@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Rendering;
@@ -23,7 +24,7 @@ class PathShapeRenderer
     {
         $renderedLineString = '';
         foreach ($lineString->getPositions() as $key => $position) {
-            if ($key === 0) {
+            if (0 === $key) {
                 $renderedLineString .= self::MOVE_TO;
             } else {
                 $renderedLineString .= ' ' . self::LINE_TO;

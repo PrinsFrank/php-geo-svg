@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry;
@@ -16,17 +17,17 @@ class GeometryCollectionFactory
     public static function createFromGeoJSONArray(array $geoJSONArray): GeometryCollection
     {
         $geometryCollection = new GeometryCollection();
-        if ($geoJSONArray['type'] !== 'FeatureCollection') {
+        if ('FeatureCollection' !== $geoJSONArray['type']) {
             throw new NotImplementedException('Only FeatureCollections are currently supported');
         }
 
         foreach ($geoJSONArray['features'] ?? [] as $feature) {
-            if ($feature['type'] !== 'Feature') {
+            if ('Feature' !== $feature['type']) {
                 throw new NotImplementedException('Only features of type "Feature" are supported.');
             }
 
             $geometryObject = GeometryObjectFactory::createForGeoJsonFeatureGeometry($feature['geometry']);
-            if ($geometryObject === null) {
+            if (null === $geometryObject) {
                 continue;
             }
 

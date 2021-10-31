@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry\GeometryObject;
@@ -32,7 +33,7 @@ class GeometryObjectFactory
     public static function createForLineStringCoordinates(array $coordinates): LineString
     {
         $lineString = new LineString();
-        foreach($coordinates as $coordinate) {
+        foreach ($coordinates as $coordinate) {
             $lineString->addPosition(new Position($coordinate[0], $coordinate[1], $coordinate[2] ?? null));
         }
 
@@ -63,9 +64,9 @@ class GeometryObjectFactory
     public static function createForMultiPolygonCoordinates(array $coordinates): MultiPolygon
     {
         $multiPolygon = new MultiPolygon();
-        foreach($coordinates as $polygonCoordinates) {
+        foreach ($coordinates as $polygonCoordinates) {
             $polygon = self::createForPolygonCoordinates($polygonCoordinates);
-            if ($polygon === null) {
+            if (null === $polygon) {
                 continue;
             }
 
@@ -89,7 +90,7 @@ class GeometryObjectFactory
     public static function createForPolygonCoordinates(array $coordinates): ?Polygon
     {
         $exteriorCoordinates = array_shift($coordinates);
-        if ($exteriorCoordinates === null) {
+        if (null === $exteriorCoordinates) {
             return null;
         }
 
