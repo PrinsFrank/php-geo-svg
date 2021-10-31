@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Unit;
 
+use PhpCsFixer\Diff\Line;
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiLineString;
+use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
 use PrinsFrank\PhpGeoSVG\Projection\EquiRectangularProjection;
 use PrinsFrank\PhpGeoSVG\Projection\MercatorProjection;
@@ -93,5 +98,49 @@ class GeoSVGTest extends TestCase
         $scale = new Scale(10);
         $geoSVG->setScale($scale);
         static::assertSame($scale, $geoSVG->getScale());
+    }
+
+    /**
+     * @covers ::render
+     */
+    public function testRender(): void
+    {
+        static::assertSame(
+            '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="360" viewbox="0 0 720 360">' . PHP_EOL .
+            ' <g>' . PHP_EOL .
+            '  <path d="M0 0"/>' . PHP_EOL .
+            ' </g>' . PHP_EOL .
+            '</svg>' . PHP_EOL,
+            (new GeoSVG())->render(
+                (new GeometryCollection())
+                    ->addGeometryObject(
+                        (new MultiLineString())
+                            ->addLineString(
+                                (new LineString())
+                                    ->addPosition(new Position(-180, 90))
+                            )
+                    )
+            )
+        );
+    }
+
+    /**
+     * @covers ::toFile
+     */
+    public function testToFile(): void
+    {
+        (new GeoSVG())->toFile(
+            (new GeometryCollection())
+                ->addGeometryObject(
+                    (new MultiLineString())
+                        ->addLineString(
+                            (new LineString())
+                                ->addPosition(new Position(-180, 90))
+                        )
+                ),
+            __DIR__ . '/geo_svg_test_actual.svg'
+        );
+
+        static::assertFileEquals(__DIR__ . '/geo_svg_test_expected.svg', __DIR__ . '/geo_svg_test_actual.svg');
     }
 }
