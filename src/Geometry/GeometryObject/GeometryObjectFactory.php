@@ -55,7 +55,12 @@ class GeometryObjectFactory
 
     public static function createForMultiPointCoordinates(array $coordinates): MultiPoint
     {
-        throw new NotImplementedException('Creating multiPoints is not supported yet');
+        $multiPoint = new MultiPoint();
+        foreach ($coordinates as $coordinate) {
+            $multiPoint->addPoint(self::createForPointCoordinates($coordinate));
+        }
+
+        return $multiPoint;
     }
 
     /**
