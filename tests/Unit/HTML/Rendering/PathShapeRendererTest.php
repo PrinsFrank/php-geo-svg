@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HTML\Rendering;
@@ -34,8 +35,8 @@ class PathShapeRendererTest extends TestCase
         $lineString->addPosition($position);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::once())->method('getX')->with($position)->willReturn(21.0);
-        $coordinator->expects(self::once())->method('getY')->with($position)->willReturn(84.0);
+        $coordinator->expects(static::once())->method('getX')->with($position)->willReturn(21.0);
+        $coordinator->expects(static::once())->method('getY')->with($position)->willReturn(84.0);
 
         static::assertSame('M21 84', PathShapeRenderer::renderLineStringPath($lineString, $coordinator));
     }
@@ -54,11 +55,11 @@ class PathShapeRendererTest extends TestCase
         $lineString->addPosition($position3);
 
         $coordinator = $this->createMock(Coordinator::class);
-        $coordinator->expects(self::exactly(3))
+        $coordinator->expects(static::exactly(3))
             ->method('getX')
             ->withConsecutive([$position1], [$position2], [$position3])
             ->willReturnOnConsecutiveCalls(42, 12, 46);
-        $coordinator->expects(self::exactly(3))
+        $coordinator->expects(static::exactly(3))
             ->method('getY')
             ->withConsecutive([$position1], [$position2], [$position3])
             ->willReturnOnConsecutiveCalls(8, 27, 0);

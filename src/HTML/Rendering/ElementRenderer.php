@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Rendering;
@@ -25,16 +26,16 @@ class ElementRenderer
             $elementContent .= str_repeat(self::INDENTING_CHAR, $currentDepth) . self::renderElement($childElement, $currentDepth);
         }
 
-        if ($element->getTextContent() !== null) {
+        if (null !== $element->getTextContent()) {
             $elementContent .= str_repeat(self::INDENTING_CHAR, $currentDepth) . $element->getTextContent()->getContent() . PHP_EOL;
         }
 
         $attributeString = AttributeRenderer::renderAttributes($element->getAttributes());
-        if ($elementContent === null && $element->canSelfClose()) {
-            return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '/>' . PHP_EOL;
+        if (null === $elementContent && $element->canSelfClose()) {
+            return '<' . $element->getTagName() . (null !== $attributeString ? ' ' . $attributeString : null) . '/>' . PHP_EOL;
         }
 
-        return '<' . $element->getTagName() . ($attributeString !== null ? ' ' . $attributeString : null) . '>' . PHP_EOL .
+        return '<' . $element->getTagName() . (null !== $attributeString ? ' ' . $attributeString : null) . '>' . PHP_EOL .
             $elementContent .
         str_repeat(self::INDENTING_CHAR, $currentDepth - 1) . '</' . $element->getTagName() . '>' . PHP_EOL;
     }

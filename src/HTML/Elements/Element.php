@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\HTML\Elements;
@@ -65,15 +66,15 @@ abstract class Element
      */
     public function canSelfClose(): bool
     {
-        if ($this instanceof ForeignElement === false) {
+        if (false === $this instanceof ForeignElement) {
             return false;
         }
 
-        if ($this->childElements !== []) {
+        if ([] !== $this->childElements) {
             return false;
         }
 
-        if ($this->textContent !== null) {
+        if (null !== $this->textContent) {
             return false;
         }
 

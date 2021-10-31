@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG;
@@ -36,7 +37,7 @@ class GeoSVG
 
     public function getProjection(): Projection
     {
-        if ($this->projection === null) {
+        if (null === $this->projection) {
             $this->projection = new EquiRectangularProjection();
         }
 
@@ -55,7 +56,7 @@ class GeoSVG
      */
     public function getBoundingBox(): BoundingBox
     {
-        if ($this->boundingBox === null) {
+        if (null === $this->boundingBox) {
             $this->boundingBox = new BoundingBox(new BoundingBoxPosition(-180, -90), new BoundingBoxPosition(180, 90));
         }
 
@@ -71,7 +72,7 @@ class GeoSVG
 
     public function getScale(): Scale
     {
-        if ($this->scale === null) {
+        if (null === $this->scale) {
             $this->scale = new Scale(1);
         }
 

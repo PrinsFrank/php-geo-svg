@@ -24,6 +24,9 @@
     "suggest": {
         "prinsfrank/natural-earth-vector-geojson-only": "Provides open source GeoJSON data sets"
     },
+    "scripts": {
+        "fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
     "repositories": [
         {
             "type": "package",

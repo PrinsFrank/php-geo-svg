@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HTML\Elements;
@@ -22,7 +23,7 @@ class ElementTest extends TestCase
     {
         parent::setUp();
 
-        $this->element = new class extends Element {
+        $this->element = new class () extends Element {
             public function getTagName(): string
             {
                 return 'test';

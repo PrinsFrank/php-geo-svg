@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Geometry\Position;
@@ -44,6 +45,6 @@ class Position
 
     public function hasElevation(): bool
     {
-        return $this->elevation !== null && $this->elevation !== 0.0;
+        return null !== $this->elevation && 0.0 !== $this->elevation;
     }
 }
