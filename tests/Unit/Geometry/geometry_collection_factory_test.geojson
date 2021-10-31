@@ -1,0 +1,15 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "featurecla": "bar"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": []
+      }
+    }
+  ]
+}
