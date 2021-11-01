@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PrinsFrank\PhpGeoSVG\Tests\Unit;
 
-use PhpCsFixer\Diff\Line;
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBox;
 use PrinsFrank\PhpGeoSVG\Geometry\BoundingBox\BoundingBoxPosition;
