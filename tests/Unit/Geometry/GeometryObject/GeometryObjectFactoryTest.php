@@ -22,7 +22,7 @@ class GeometryObjectFactoryTest extends TestCase
     /**
      * @covers ::createForGeoJsonFeatureGeometry
      */
-    public function testCreateForGeoJsonFeatuerGeometryThrowsExceptionForUnsupportedTypes(): void
+    public function testCreateForGeoJsonFeatureGeometryThrowsExceptionForUnsupportedTypes(): void
     {
         $this->expectException(NotImplementedException::class);
         $this->expectExceptionMessage('Feature geometries of type "foo" are currently not supported');
