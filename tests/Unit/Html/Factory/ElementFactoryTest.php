@@ -8,13 +8,18 @@ use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Coordinator\Coordinator;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiLineString;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPoint;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPolygon;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Point;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\Html\Elements\CircleElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\GroupElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\PathElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\SvgElement;
+use PrinsFrank\PhpGeoSVG\Html\Elements\Text\TextContent;
+use PrinsFrank\PhpGeoSVG\Html\Elements\TitleElement;
 use PrinsFrank\PhpGeoSVG\Html\Factory\ElementFactory;
 
 /**
@@ -84,6 +89,116 @@ class ElementFactoryTest extends TestCase
                     (new PathElement())->setAttribute('d', 'M180 180 L180 0 L90 90')
                 ),
             ElementFactory::buildForGeometryCollection($geometryCollection, $coordinator)
+        );
+    }
+
+    /**
+     * @covers ::buildForGeometryObject
+     */
+    public function testBuildForGeometryObject(): void
+    {
+        $coordinator = $this->createMock(Coordinator::class);
+
+        static::assertEquals((new PathElement())->setAttribute('d', ''), ElementFactory::buildForGeometryObject(new LineString(), $coordinator));
+        static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiPoint(), $coordinator));
+        static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiPolygon(), $coordinator));
+        static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiLineString(), $coordinator));
+        static::assertEquals((new PathElement())->setAttribute('d', ''), ElementFactory::buildForGeometryObject(new Polygon(new LineString()), $coordinator));
+        static::assertEquals(
+            (new CircleElement())->setAttribute('cx', 0)->setAttribute('cy', 0),
+            ElementFactory::buildForGeometryObject(new Point(new Position(0, 1)), $coordinator)
+        );
+    }
+
+    /**
+     * @covers ::buildForGeometryObject
+     */
+    public function testBuildForGeometryObjectBuildsTitleWhenPresent(): void
+    {
+        static::assertEquals(
+            (new PathElement())
+                ->setAttribute('d', '')
+                ->addChildElement(
+                    (new TitleElement())->setTextContent(new TextContent('foo'))
+                ),
+            ElementFactory::buildForGeometryObject(
+                (new LineString())->setTitle('foo'),
+                $this->createMock(Coordinator::class)
+            )
+        );
+    }
+
+    /**
+     * @covers ::buildForGeometryObject
+     */
+    public function testBuildForGeometryObjectSetsFeatureClassWhenPresent(): void
+    {
+        static::assertEquals(
+            (new PathElement())
+                ->setAttribute('d', '')
+                ->setAttribute('data-feature-class', 'foo'),
+            ElementFactory::buildForGeometryObject(
+                (new LineString())->setFeatureClass('foo'),
+                $this->createMock(Coordinator::class)
+            )
+        );
+    }
+
+    /**
+     * @covers ::buildForMultiPolygon
+     */
+    public function testBuildForMultiPolygonWithoutPolygons(): void
+    {
+        static::assertEquals(
+            (new GroupElement()),
+            ElementFactory::buildForMultiPolygon(new MultiPolygon(), $this->createMock(Coordinator::class))
+        );
+    }
+
+    /**
+     * @covers ::buildForMultiPolygon
+     */
+    public function testBuildForMultiPolygon(): void
+    {
+        static::assertEquals(
+            (new GroupElement())
+                ->addChildElement((new PathElement())->setAttribute('d', ''))
+                ->addChildElement((new PathElement())->setAttribute('d', '')),
+            ElementFactory::buildForMultiPolygon(
+                (new MultiPolygon())
+                    ->addPolygon(new Polygon(new LineString()))
+                    ->addPolygon(new Polygon(new LineString())),
+                $this->createMock(Coordinator::class)
+            )
+        );
+    }
+
+    /**
+     * @covers ::buildForMultiLineString
+     */
+    public function testBuildForMultiLineStringWithoutPolygons(): void
+    {
+        static::assertEquals(
+            (new GroupElement()),
+            ElementFactory::buildForMultiLineString(new MultiLineString(), $this->createMock(Coordinator::class))
+        );
+    }
+
+    /**
+     * @covers ::buildForMultiLineString
+     */
+    public function testBuildForMultiLineString(): void
+    {
+        static::assertEquals(
+            (new GroupElement())
+                ->addChildElement((new PathElement())->setAttribute('d', ''))
+                ->addChildElement((new PathElement())->setAttribute('d', '')),
+            ElementFactory::buildForMultiLineString(
+                (new MultiLineString())
+                    ->addLineString(new LineString())
+                    ->addLineString(new LineString()),
+                $this->createMock(Coordinator::class)
+            )
         );
     }
 
