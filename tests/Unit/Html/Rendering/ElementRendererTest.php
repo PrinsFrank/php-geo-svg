@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace PrinsFrank\PhpGeoSVG\Tests\Unit\Html\Rendering;
 
 use PHPUnit\Framework\TestCase;
+use PrinsFrank\PhpGeoSVG\Exception\InvalidArgumentException;
 use PrinsFrank\PhpGeoSVG\Exception\RecursionException;
 use PrinsFrank\PhpGeoSVG\Html\Elements\GroupElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\PathElement;
+use PrinsFrank\PhpGeoSVG\Html\Elements\SvgElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\Text\TextContent;
 use PrinsFrank\PhpGeoSVG\Html\Elements\TitleElement;
 use PrinsFrank\PhpGeoSVG\Html\Rendering\ElementRenderer;
@@ -148,6 +150,74 @@ class ElementRendererTest extends TestCase
             ' </title>' . PHP_EOL .
             '</path>' . PHP_EOL,
             ElementRenderer::renderElement((new PathElement())->addChildElement(new TitleElement()))
+        );
+    }
+
+    /**
+     * @covers ::renderSelfClosingElement
+     */
+    public function testRenderSelfClosingElementThrowsExceptionWithNonSelfClosingElement(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Only elements that can self close can be rendered as self closing elements');
+
+        ElementRenderer::renderSelfClosingElement(new TitleElement());
+    }
+
+    /**
+     * @covers ::renderSelfClosingElement
+     */
+    public function testRenderSelfClosingElement(): void
+    {
+        static::assertEquals(
+            '<path/>' . PHP_EOL,
+            ElementRenderer::renderSelfClosingElement(new PathElement())
+        );
+
+        static::assertEquals(
+            '<path foo="bar"/>' . PHP_EOL,
+            ElementRenderer::renderSelfClosingElement(
+                (new PathElement())->setAttribute('foo', 'bar')
+            )
+        );
+    }
+
+    /**
+     * @covers ::renderChildElements
+     */
+    public function testRenderChildElementsWithNoChildElements(): void
+    {
+        static::assertNull(ElementRenderer::renderChildElements([], 0));
+    }
+
+    /**
+     * @covers ::renderChildElements
+     */
+    public function testRenderChildElements(): void
+    {
+        static::assertSame(
+            '   <svg xmlns="http://www.w3.org/2000/svg" version="1.1"/>' . PHP_EOL .
+            '   <path/>' . PHP_EOL,
+            ElementRenderer::renderChildElements([new SvgElement(), new PathElement()], 3)
+        );
+    }
+
+    /**
+     * @covers ::renderTextContent
+     */
+    public function testRenderTextContentWhenItIsNonExisting(): void
+    {
+        static::assertNull(ElementRenderer::renderTextContent(null, 42));
+    }
+
+    /**
+     * @covers ::renderTextContent
+     */
+    public function testRenderTextContent(): void
+    {
+        static::assertSame(
+            '   foo' . PHP_EOL,
+            ElementRenderer::renderTextContent(new TextContent('foo'), 3)
         );
     }
 }
