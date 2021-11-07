@@ -6,7 +6,9 @@ namespace PrinsFrank\PhpGeoSVG\Tests\Unit\Html\Factory;
 
 use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Coordinator\Coordinator;
+use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\GeometryObject;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiLineString;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPoint;
@@ -15,6 +17,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Point;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\Html\Elements\CircleElement;
+use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
 use PrinsFrank\PhpGeoSVG\Html\Elements\GroupElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\PathElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\SvgElement;
@@ -90,6 +93,18 @@ class ElementFactoryTest extends TestCase
                 ),
             ElementFactory::buildForGeometryCollection($geometryCollection, $coordinator)
         );
+    }
+
+    /**
+     * @covers ::buildForGeometryObject
+     */
+    public function testBuildForGeometryObjectThrowsExceptionOnUnsupportedObject(): void
+    {
+        $this->expectException(NotImplementedException::class);
+        $this->expectExceptionMessage('GeometryObject with class "Foo" can\'t be built yet.');
+
+        $geometryObject = $this->getMockBuilder(GeometryObject::class)->setMockClassName('Foo')->getMock();
+        ElementFactory::buildForGeometryObject($geometryObject, $this->createMock(Coordinator::class));
     }
 
     /**
