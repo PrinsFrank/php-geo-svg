@@ -7,32 +7,30 @@ use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 
 abstract class AbstractCylindricalEqualAreaProjection implements Projection
 {
-    abstract public function getStandardParallelDegree(): float;
-
     abstract public function getWidthToHeightAspectRatio(): float;
 
     public function getX(Position $position): float
     {
-        return (deg2rad($position->longitude) - 0) * cos(deg2rad($this->getStandardParallelDegree()));
+        return ($position->longitude - Position::MIN_LONGITUDE) * $this->getWidthToHeightAspectRatio() / 2;
     }
 
     public function getY(Position $position): float
     {
-        return sin($position->latitude) / cos($this->getStandardParallelDegree());
+        return (-sin(deg2rad($position->latitude)) + 1) * .5 * Position::TOTAL_LATITUDE;
     }
 
     public function getMaxX(): float
     {
-        return 360;
+        return $this->getMaxY() * $this->getWidthToHeightAspectRatio();
     }
 
     public function getMaxY(): float
     {
-        return 700;
+        return Position::TOTAL_LATITUDE;
     }
 
     public function getMaxLatitude(): float
     {
-        return 90;
+        return Position::MAX_LATITUDE;
     }
 }
