@@ -103,7 +103,10 @@ class ElementFactoryTest extends TestCase
         static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiPoint(), $coordinator));
         static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiPolygon(), $coordinator));
         static::assertEquals(new GroupElement(), ElementFactory::buildForGeometryObject(new MultiLineString(), $coordinator));
-        static::assertEquals((new PathElement())->setAttribute('d', ''), ElementFactory::buildForGeometryObject(new Polygon(new LineString()), $coordinator));
+        static::assertEquals(
+            (new GroupElement())->addChildElement((new PathElement())->setAttribute('d', '')),
+            ElementFactory::buildForGeometryObject(new Polygon(new LineString()), $coordinator)
+        );
         static::assertEquals(
             (new CircleElement())->setAttribute('cx', 0)->setAttribute('cy', 0),
             ElementFactory::buildForGeometryObject(new Point(new Position(0, 1)), $coordinator)
@@ -162,8 +165,16 @@ class ElementFactoryTest extends TestCase
     {
         static::assertEquals(
             (new GroupElement())
-                ->addChildElement((new PathElement())->setAttribute('d', ''))
-                ->addChildElement((new PathElement())->setAttribute('d', '')),
+                ->addChildElement(
+                    (new GroupElement())->addChildElement(
+                        (new PathElement())->setAttribute('d', '')
+                    )
+                )
+                ->addChildElement(
+                    (new GroupElement())->addChildElement(
+                        (new PathElement())->setAttribute('d', '')
+                    )
+                ),
             ElementFactory::buildForMultiPolygon(
                 (new MultiPolygon())
                     ->addPolygon(new Polygon(new LineString()))
@@ -268,6 +279,72 @@ class ElementFactoryTest extends TestCase
                 ->addChildElement((new CircleElement())->setAttribute('cy', -90)->setAttribute('cx', -90))
                 ->addChildElement((new CircleElement())->setAttribute('cy', 90)->setAttribute('cx', 90)),
             ElementFactory::buildForMultiPoint($multiPoint, $coordinator)
+        );
+    }
+
+    /**
+     * @covers ::buildForPolygon
+     */
+    public function testBuildForPolygonWithoutInteriorRings(): void
+    {
+        $lineString = new LineString();
+        $position1 = new Position(0, 45);
+        $lineString->addPosition($position1);
+        $position2 = new Position(0, -45);
+        $lineString->addPosition($position2);
+        $polygon = new Polygon($lineString);
+
+        $coordinator = $this->createMock(Coordinator::class);
+        $coordinator->expects(static::exactly(2))
+            ->method('getX')
+            ->withConsecutive([$position1], [$position2])
+            ->willReturnOnConsecutiveCalls(0, 0);
+        $coordinator->expects(static::exactly(2))
+            ->method('getY')
+            ->withConsecutive([$position1], [$position2])
+            ->willReturnOnConsecutiveCalls(0, 100);
+
+        static::assertEquals(
+            (new GroupElement())
+                ->addChildElement((new PathElement())->setAttribute('d', 'M0 0 L0 100')),
+            ElementFactory::buildForPolygon($polygon, $coordinator)
+        );
+    }
+
+    /**
+     * @covers ::buildForPolygon
+     */
+    public function testBuildForPolygonWithInteriorRings(): void
+    {
+        $lineString = new LineString();
+        $position1 = new Position(0, 45);
+        $lineString->addPosition($position1);
+        $position2 = new Position(0, -45);
+        $lineString->addPosition($position2);
+        $polygon = new Polygon($lineString);
+
+        $interiorLineString = new LineString();
+        $position3 = new Position(0, 45);
+        $interiorLineString->addPosition($position3);
+        $position4 = new Position(0, -45);
+        $interiorLineString->addPosition($position4);
+        $polygon->addInteriorRing($interiorLineString);
+
+        $coordinator = $this->createMock(Coordinator::class);
+        $coordinator->expects(static::exactly(4))
+            ->method('getX')
+            ->withConsecutive([$position1], [$position2], [$position3], [$position4])
+            ->willReturnOnConsecutiveCalls(0, 0, 100, 150);
+        $coordinator->expects(static::exactly(4))
+            ->method('getY')
+            ->withConsecutive([$position1], [$position2], [$position3], [$position4])
+            ->willReturnOnConsecutiveCalls(0, 100, 200, 300);
+
+        static::assertEquals(
+            (new GroupElement())
+                ->addChildElement((new PathElement())->setAttribute('d', 'M0 0 L0 100'))
+                ->addChildElement((new PathElement())->setAttribute('d', 'M100 200 L150 300')),
+            ElementFactory::buildForPolygon($polygon, $coordinator)
         );
     }
 
