@@ -119,15 +119,6 @@ class ElementFactory
      */
     public static function buildForPolygon(Polygon $polygon, Coordinator $coordinator): Element
     {
-        if ([] === $polygon->getInteriorRings() && (null === $polygon->getFeatureClass() || null === $polygon->getExteriorRing()->getFeatureClass())) {
-            $exteriorRing = $polygon->getExteriorRing();
-            if (null === $exteriorRing->getFeatureClass() && null !== $polygon->getFeatureClass()) {
-                $exteriorRing->setFeatureClass($polygon->getFeatureClass());
-            }
-
-            return self::buildForGeometryObject($exteriorRing, $coordinator);
-        }
-
         $element = new GroupElement();
         $element->addChildElement(self::buildForGeometryObject($polygon->getExteriorRing(), $coordinator));
         foreach ($polygon->getInteriorRings() as $interiorRing) {

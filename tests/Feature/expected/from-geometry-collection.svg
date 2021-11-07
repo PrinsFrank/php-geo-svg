@@ -1,34 +1,46 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="720" height="360" viewbox="0 0 720 360">
  <g>
-  <path d="M6 32 L200 162 L310 16" data-feature-class="Continent">
-   <title>
-    North America
-   </title>
-  </path>
-  <path d="M200 162 L286 194 L220 290" data-feature-class="Continent">
-   <title>
-    South America
-   </title>
-  </path>
-  <path d="M336 108 L420 106 L414 40 L312 48" data-feature-class="Continent">
-   <title>
-    Europe
-   </title>
-  </path>
-  <path d="M336 108 L420 106 L462 158 L404 250 L326 146" data-feature-class="Continent">
-   <title>
-    Africa
-   </title>
-  </path>
-  <path d="M414 40 L420 106 L462 158 L622 184 L702 46" data-feature-class="Continent">
-   <title>
-    Asia
-   </title>
-  </path>
-  <path d="M590 210 L666 210 L656 266 L588 250" data-feature-class="Continent">
-   <title>
-    Australia
-   </title>
-  </path>
+  <g>
+   <path d="M6 32 L200 162 L310 16" data-feature-class="Continent">
+    <title>
+     North America
+    </title>
+   </path>
+  </g>
+  <g>
+   <path d="M200 162 L286 194 L220 290" data-feature-class="Continent">
+    <title>
+     South America
+    </title>
+   </path>
+  </g>
+  <g>
+   <path d="M336 108 L420 106 L414 40 L312 48" data-feature-class="Continent">
+    <title>
+     Europe
+    </title>
+   </path>
+  </g>
+  <g>
+   <path d="M336 108 L420 106 L462 158 L404 250 L326 146" data-feature-class="Continent">
+    <title>
+     Africa
+    </title>
+   </path>
+  </g>
+  <g>
+   <path d="M414 40 L420 106 L462 158 L622 184 L702 46" data-feature-class="Continent">
+    <title>
+     Asia
+    </title>
+   </path>
+  </g>
+  <g>
+   <path d="M590 210 L666 210 L656 266 L588 250" data-feature-class="Continent">
+    <title>
+     Australia
+    </title>
+   </path>
+  </g>
  </g>
 </svg>
