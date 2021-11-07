@@ -18,7 +18,7 @@ When searching for high quality SVG's for [my blog](https://prinsfrank.nl/countr
 - Supports creation of SVGs from GeoJSON (directly from file, as a JSON string or from an array) and manual GeometryCollection.
 - Output the svg directly to your user on request or output to a file.
 - Render an entire world map or only part of it by using a bounding box.
-- Easy support for projections. Currently supported: EquiRectangular, Mercator and Miller. Please open a PR to add any extra ones.
+- Easy support for projections. Currently supported: EquiRectangular, Mercator, Miller and several Equal area projections (Lambert, Behrmann, Smyth, Trystan, Hobo-Dyer, Gall-Peters, Balthasart and Tobler's world in a square) Please open a PR to add any extra ones.
 - When you create or edit a GeometryCollection, a Fluent Interface is provided to allow for method chaining.
 
 |Showcase|
