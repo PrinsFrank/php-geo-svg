@@ -43,6 +43,8 @@ When searching for high quality SVG's for [my blog](https://prinsfrank.nl/countr
 
 ## Setup
 
+> Make sure you are running PHP 8.0 or higher to use this package
+
 To start right away, run the following command in your composer project;
 
 ```composer require prinsfrank/php-geo-svg```
