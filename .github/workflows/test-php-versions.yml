@@ -1,0 +1,27 @@
+name: Test all PHP versions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [7.2, 7.3, 7.4, 8.0, 8.1]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run Unit tests
+        run: vendor/bin/phpunit --testsuite Unit
+      - name: Run Functional tests
+        run: vendor/bin/phpunit --testsuite Functional
