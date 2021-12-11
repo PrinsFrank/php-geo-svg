@@ -24,4 +24,4 @@ jobs:
       - name: Run Unit tests
         run: vendor/bin/phpunit --testsuite Unit
       - name: Run Functional tests
-        run: vendor/bin/phpunit --testsuite Functional
+        run: vendor/bin/phpunit --testsuite Feature
