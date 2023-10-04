@@ -49,4 +49,17 @@ class GeometryObjectTest extends TestCase
         $geometryObject->setFeatureClass('foo');
         static::assertSame('foo', $geometryObject->getFeatureClass());
     }
+
+    /**
+     * @covers ::getProperties
+     * @covers ::setProperties
+     */
+    public function testProperties(): void
+    {
+        $geometryObject = $this->geometryObject;
+        static::assertNull($geometryObject->getProperties());
+
+        $geometryObject->setProperties(['foo' => 'bar']);
+        static::assertSame(['foo' => 'bar'], $geometryObject->getProperties());
+    }
 }

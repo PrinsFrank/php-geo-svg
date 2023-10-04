@@ -30,7 +30,7 @@ class GeometryCollection
     }
 
     /**
-     * @return GeometryObjectCallback
+     * @return ?GeometryObjectCallback
      */
     public function getGeometryObjectCallback(): ?GeometryObjectCallback
     {
