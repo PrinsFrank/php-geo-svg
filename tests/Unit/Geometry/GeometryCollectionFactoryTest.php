@@ -7,7 +7,10 @@ use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\GeometryObject;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiLineString;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObjectCallback;
+use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
 
 /**
  * @coversDefaultClass \PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory
@@ -88,12 +91,45 @@ class GeometryCollectionFactoryTest extends TestCase
     /**
      * @covers ::createFromGeoJSONArray
      */
+    public function testCreatesFromGeoJSONArrayWithCallback(): void
+    {
+        $geometryObjectCallback = new class implements GeometryObjectCallback {
+            public function __invoke(GeometryObject $geometryObject, Element $element): void
+            {
+            }
+        };
+
+        static::assertEquals(
+            (new GeometryCollection())
+                ->setGeometryObjectCallback($geometryObjectCallback)
+                ->addGeometryObject(new MultiLineString()),
+            GeometryCollectionFactory::createFromGeoJSONArray(
+                [
+                    'type'     => 'FeatureCollection',
+                    'features' => [
+                        [
+                            'type' => 'Feature',
+                            'geometry' => [
+                                'type' => 'MultiLineString',
+                                'coordinates' => []
+                            ]
+                        ]
+                    ]
+                ], $geometryObjectCallback
+            )
+        );
+    }
+
+    /**
+     * @covers ::createFromGeoJSONArray
+     */
     public function testCreatesFromGeoJSONArraySetsFeatureCla(): void
     {
         static::assertEquals(
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                    ->setProperties(['featurecla' => 'bar'])
                     ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJSONArray(
@@ -125,6 +161,7 @@ class GeometryCollectionFactoryTest extends TestCase
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                        ->setProperties(['featurecla' => 'bar'])
                         ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJsonString('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"featurecla":"bar"},"geometry":{"type":"MultiLineString","coordinates":[]}}]}')
@@ -140,6 +177,7 @@ class GeometryCollectionFactoryTest extends TestCase
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                        ->setProperties(['featurecla' => 'bar'])
                         ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geometry_collection_factory_test.geojson')

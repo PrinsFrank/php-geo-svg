@@ -14,6 +14,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPoint;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPolygon;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Point;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObjectCallback;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\Html\Elements\CircleElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
@@ -37,7 +38,7 @@ class ElementFactory
             ->setAttribute('viewbox', '0 0 ' . $coordinator->getWidth() . ' ' . $coordinator->getHeight());
 
         foreach ($geometryCollection->getGeometryObjects() as $geometryObject) {
-            $svgElement->addChildElement(self::buildForGeometryObject($geometryObject, $coordinator));
+            $svgElement->addChildElement(self::buildForGeometryObject($geometryObject, $coordinator, $geometryCollection->getGeometryObjectCallback()));
         }
 
         return $svgElement;
@@ -46,7 +47,7 @@ class ElementFactory
     /**
      * @throws NotImplementedException
      */
-    public static function buildForGeometryObject(GeometryObject $geometryObject, Coordinator $coordinator): Element
+    public static function buildForGeometryObject(GeometryObject $geometryObject, Coordinator $coordinator, GeometryObjectCallback $geometryObjectCallback = null): Element
     {
         $element = match (get_class($geometryObject)) {
             LineString::class => self::buildForLineString($geometryObject, $coordinator),
@@ -64,6 +65,10 @@ class ElementFactory
 
         if (null !== $geometryObject->getFeatureClass()) {
             $element->setAttribute('data-feature-class', $geometryObject->getFeatureClass());
+        }
+
+        if(!is_null($geometryObjectCallback)) {
+            $geometryObjectCallback->__invoke($geometryObject, $element);
         }
 
         return $element;

@@ -14,9 +14,14 @@ class GeometryCollectionFactory
     /**
      * @throws NotImplementedException|InvalidPositionException
      */
-    public static function createFromGeoJSONArray(array $geoJSONArray): GeometryCollection
+    public static function createFromGeoJSONArray(array $geoJSONArray, GeometryObjectCallback $geometryObjectCallback = null): GeometryCollection
     {
         $geometryCollection = new GeometryCollection();
+
+        if(!is_null($geometryObjectCallback)) {
+            $geometryCollection->setGeometryObjectCallback($geometryObjectCallback);
+        }
+
         if ('FeatureCollection' !== $geoJSONArray['type']) {
             throw new NotImplementedException('Only FeatureCollections are currently supported');
         }
@@ -35,6 +40,10 @@ class GeometryCollectionFactory
                 $geometryObject->setFeatureClass($feature['properties']['featurecla']);
             }
 
+            if(array_key_exists('properties', $feature) && !empty($feature['properties'])) {
+                $geometryObject->setProperties($feature['properties']);
+            }
+
             $geometryCollection->addGeometryObject($geometryObject);
         }
 
@@ -44,16 +53,16 @@ class GeometryCollectionFactory
     /**
      * @throws JsonException|NotImplementedException|InvalidPositionException
      */
-    public static function createFromGeoJsonString(string $geoJsonString): GeometryCollection
+    public static function createFromGeoJsonString(string $geoJsonString, GeometryObjectCallback $geometryObjectCallback = null): GeometryCollection
     {
-        return self::createFromGeoJSONArray(json_decode($geoJsonString, true, 512, JSON_THROW_ON_ERROR));
+        return self::createFromGeoJSONArray(json_decode($geoJsonString, true, 512, JSON_THROW_ON_ERROR), $geometryObjectCallback);
     }
 
     /**
      * @throws JsonException|NotImplementedException|InvalidPositionException
      */
-    public static function createFromGeoJSONFilePath(string $path): GeometryCollection
+    public static function createFromGeoJSONFilePath(string $path, GeometryObjectCallback $geometryObjectCallback = null): GeometryCollection
     {
-        return self::createFromGeoJsonString(file_get_contents($path));
+        return self::createFromGeoJsonString(file_get_contents($path), $geometryObjectCallback);
     }
 }

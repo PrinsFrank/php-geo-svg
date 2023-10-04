@@ -6,3 +6,5 @@ composer.lock
 
 .php-cs-fixer.cache
 *_actual.*
+
+.idea

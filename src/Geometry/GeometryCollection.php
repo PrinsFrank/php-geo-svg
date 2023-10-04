@@ -11,6 +11,9 @@ class GeometryCollection
     /** @var GeometryObject[] */
     protected array $geometryObjects = [];
 
+    /** @var ?GeometryObjectCallback */
+    protected ?GeometryObjectCallback $geometryObjectCallback = null;
+
     public function addGeometryObject(GeometryObject $geometryObject): self
     {
         $this->geometryObjects[] = $geometryObject;
@@ -25,4 +28,25 @@ class GeometryCollection
     {
         return $this->geometryObjects;
     }
+
+    /**
+     * @return ?GeometryObjectCallback
+     */
+    public function getGeometryObjectCallback(): ?GeometryObjectCallback
+    {
+        return $this->geometryObjectCallback;
+    }
+
+    /**
+     * @param ?GeometryObjectCallback $geometryObjectCallback
+     * @return GeometryCollection
+     */
+    public function setGeometryObjectCallback(?GeometryObjectCallback $geometryObjectCallback): self
+    {
+        $this->geometryObjectCallback = $geometryObjectCallback;
+
+        return $this;
+    }
+
+
 }
