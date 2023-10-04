@@ -39,7 +39,7 @@ class GeometryCollection
 
     /**
      * @param ?GeometryObjectCallback $geometryObjectCallback
-     * @return void
+     * @return GeometryCollection
      */
     public function setGeometryObjectCallback(?GeometryObjectCallback $geometryObjectCallback): self
     {
