@@ -15,6 +15,7 @@ use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPoint;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPolygon;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Point;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObjectCallback;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\Html\Elements\CircleElement;
 use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
@@ -158,6 +159,28 @@ class ElementFactoryTest extends TestCase
             ElementFactory::buildForGeometryObject(
                 (new LineString())->setFeatureClass('foo'),
                 $this->createMock(Coordinator::class)
+            )
+        );
+    }
+
+    /**
+     * @covers ::buildForGeometryObject
+     */
+    public function testBuildForGeometryObjectInvokeCallbackWhenPresent(): void
+    {
+        static::assertEquals(
+            (new PathElement())
+                ->setAttribute('d', '')
+                ->setAttribute('data-foo', 'bar'),
+            ElementFactory::buildForGeometryObject(
+                (new LineString())->setProperties(['foo'=>'bar']),
+                $this->createMock(Coordinator::class),
+                new class implements GeometryObjectCallback {
+                    public function __invoke(GeometryObject $geometryObject, Element $element): void
+                    {
+                        $element->setAttribute('data-foo', $geometryObject->getProperties()['foo']);
+                    }
+                }
             )
         );
     }

@@ -7,7 +7,10 @@ use PHPUnit\Framework\TestCase;
 use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\GeometryObject;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiLineString;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObjectCallback;
+use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
 
 /**
  * @coversDefaultClass \PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory
@@ -81,6 +84,38 @@ class GeometryCollectionFactoryTest extends TestCase
                         ]
                     ]
                 ]
+            )
+        );
+    }
+
+    /**
+     * @covers ::createFromGeoJSONArray
+     */
+    public function testCreatesFromGeoJSONArrayWithCallback(): void
+    {
+        $geometryObjectCallback = new class implements GeometryObjectCallback {
+            public function __invoke(GeometryObject $geometryObject, Element $element): void
+            {
+            }
+        };
+
+        static::assertEquals(
+            (new GeometryCollection())
+                ->setGeometryObjectCallback($geometryObjectCallback)
+                ->addGeometryObject(new MultiLineString()),
+            GeometryCollectionFactory::createFromGeoJSONArray(
+                [
+                    'type'     => 'FeatureCollection',
+                    'features' => [
+                        [
+                            'type' => 'Feature',
+                            'geometry' => [
+                                'type' => 'MultiLineString',
+                                'coordinates' => []
+                            ]
+                        ]
+                    ]
+                ], $geometryObjectCallback
             )
         );
     }

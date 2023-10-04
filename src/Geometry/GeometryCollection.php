@@ -38,12 +38,14 @@ class GeometryCollection
     }
 
     /**
-     * @param GeometryObjectCallback $geometryObjectCallback
+     * @param ?GeometryObjectCallback $geometryObjectCallback
      * @return void
      */
-    public function setGeometryObjectCallback(GeometryObjectCallback $geometryObjectCallback): void
+    public function setGeometryObjectCallback(?GeometryObjectCallback $geometryObjectCallback): self
     {
         $this->geometryObjectCallback = $geometryObjectCallback;
+
+        return $this;
     }
 
 

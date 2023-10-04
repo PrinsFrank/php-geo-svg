@@ -34,11 +34,34 @@ class GeometryCollectionTest extends TestCase
         $geometryCollection->addGeometryObject($multiLineString);
         static::assertSame([$lineString, $multiLineString], $geometryCollection->getGeometryObjects());
 
-        $geometryObjectCallback = new class implements GeometryObjectCallback {
-            function __invoke(GeometryObject $geometryObject, Element $element): void
-            {}
-        };
+        $geometryObjectCallback = $this->createGeometryObjectCallback();
         $geometryCollection->setGeometryObjectCallback($geometryObjectCallback);
         static::assertSame($geometryObjectCallback, $geometryCollection->getGeometryObjectCallback());
+    }
+
+    /**
+     * @covers ::getGeometryObjectCallback
+     * @covers ::setGeometryObjectCallback
+     */
+    public function testGetGeometryObjectCallback(): void
+    {
+        $geometryObject = new GeometryCollection();
+        static::assertNull($geometryObject->getGeometryObjectCallback());
+
+        $geometryObjectCallback = $this->createGeometryObjectCallback();
+        $geometryObject->setGeometryObjectCallback($geometryObjectCallback);
+        static::assertSame($geometryObjectCallback, $geometryObject->getGeometryObjectCallback());
+
+        $geometryObject->setGeometryObjectCallback(null);
+        static::assertNull($geometryObject->getGeometryObjectCallback());
+    }
+
+    private function createGeometryObjectCallback(): GeometryObjectCallback
+    {
+        return new class implements GeometryObjectCallback {
+            public function __invoke(GeometryObject $geometryObject, Element $element): void
+            {
+            }
+        };
     }
 }
