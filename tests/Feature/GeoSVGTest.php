@@ -11,11 +11,14 @@ use PrinsFrank\PhpGeoSVG\Exception\NotImplementedException;
 use PrinsFrank\PhpGeoSVG\Exception\PhpGeoSVGException;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollection;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryCollectionFactory;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\GeometryObject;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\LineString;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\MultiPolygon;
 use PrinsFrank\PhpGeoSVG\Geometry\GeometryObject\Polygon;
+use PrinsFrank\PhpGeoSVG\Geometry\GeometryObjectCallback;
 use PrinsFrank\PhpGeoSVG\Geometry\Position\Position;
 use PrinsFrank\PhpGeoSVG\GeoSVG;
+use PrinsFrank\PhpGeoSVG\Html\Elements\Element;
 
 /**
  * @coversNothing
@@ -33,6 +36,27 @@ class GeoSVGTest extends TestCase
             );
 
         static::assertFileEquals(__DIR__ . '/expected/from-geojson-file.svg', __DIR__ . '/actual/from-geojson-file.svg');
+    }
+
+    public function testFromGeoJsonFileWithCallback(): void
+    {
+        (new GeoSVG())
+            ->toFile(
+                GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geojson/continents.geojson',
+                    new class implements GeometryObjectCallback {
+                        public function __invoke(GeometryObject $geometryObject, Element $element): void
+                        {
+                            $properties = $geometryObject->getProperties();
+                            if(!empty($properties) && array_key_exists('name', $properties)) {
+                                $element->setAttribute('data-name', $properties['name']);
+                            }
+                        }
+                }),
+                __DIR__ . '/actual/from-geojson-file-callback.svg',
+
+            );
+
+        static::assertFileEquals(__DIR__ . '/expected/from-geojson-file-callback.svg', __DIR__ . '/actual/from-geojson-file-callback.svg');
     }
 
     /**

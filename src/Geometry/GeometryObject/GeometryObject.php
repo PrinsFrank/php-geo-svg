@@ -8,6 +8,7 @@ abstract class GeometryObject
 {
     protected ?string $title        = null;
     protected ?string $featureClass = null;
+    protected ?array $properties = null;
 
     public function setTitle(?string $title): self
     {
@@ -32,4 +33,16 @@ abstract class GeometryObject
     {
         return $this->featureClass;
     }
+
+    public function getProperties(): ?array
+    {
+        return $this->properties;
+    }
+
+    public function setProperties(array $properties): void
+    {
+        $this->properties = $properties;
+    }
+
+
 }

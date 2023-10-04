@@ -345,3 +345,21 @@ Or set the bounding box using the 'setBoundingBox' method;
 $geoSVG = new GeoSVG();
 $geoSVG->setBoundingBox($boundingBox);
 ```
+
+## Using a callback to modify the SVG
+```
+$geoJsonArray = ['type'=>'FeatureCollection','features'=>[['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[-177,74],[-80,9],[-25,82]]]]],['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[-80,9],[-37,-7],[-70,-55]]]]],['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[-12,36],[30,37],[27,70],[-24,66]]]]],['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[-12,36],[30,37],[51,11],[22,-35],[-17,17]]]]],['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[27,70],[30,37],[51,11],[131,-2],[171,67]]]]],['type'=>'Feature','properties'=>['featurecla'=>'Continent'],'geometry'=>['type'=>'MultiLineString','coordinates'=>[[[115,-15],[153,-15],[148,-43],[114,-35]]]]]]];
+
+
+$geoSVG = new GeoSVG();
+$geometryCollection = GeometryCollectionFactory::createFromGeoJsonArray($geoJsonArray);
+$geoSVG->toFile($geometryCollection, 'output/file.svg', new class implements GeometryObjectCallback {
+    public function __invoke(GeometryObject $geometryObject, Element $element): void
+    {
+        $properties = $geometryObject->getProperties();
+        if(!empty($properties) && array_key_exists('name', $properties)) {
+            $element->setAttribute('data-name', $properties['name']);
+        }
+    }
+});
+```
