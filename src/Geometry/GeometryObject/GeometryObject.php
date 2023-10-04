@@ -39,9 +39,11 @@ abstract class GeometryObject
         return $this->properties;
     }
 
-    public function setProperties(array $properties): void
+    public function setProperties(array $properties): self
     {
         $this->properties = $properties;
+
+        return $this;
     }
 
 

@@ -94,6 +94,7 @@ class GeometryCollectionFactoryTest extends TestCase
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                    ->setProperties(['featurecla' => 'bar'])
                     ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJSONArray(
@@ -125,6 +126,7 @@ class GeometryCollectionFactoryTest extends TestCase
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                        ->setProperties(['featurecla' => 'bar'])
                         ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJsonString('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"featurecla":"bar"},"geometry":{"type":"MultiLineString","coordinates":[]}}]}')
@@ -140,6 +142,7 @@ class GeometryCollectionFactoryTest extends TestCase
             (new GeometryCollection())
                 ->addGeometryObject(
                     (new MultiLineString())
+                        ->setProperties(['featurecla' => 'bar'])
                         ->setFeatureClass('bar')
                 ),
             GeometryCollectionFactory::createFromGeoJSONFilePath(__DIR__ . '/geometry_collection_factory_test.geojson')
